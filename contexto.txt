@@ -1,0 +1,235 @@
+==============================
+PROYECTO WEB - GEEK SOLUTION
+==============================
+
+EMPRESA:
+Geek Solution
+
+DESCRIPCIÓN GENERAL:
+Somos una empresa de innovaciones tecnológicas comprometida con brindar soluciones de alto nivel a nuestros clientes, ejecutándolas en tiempos establecidos bajo normativas SLA, optimizando costos y agregando valor a cada uno de nuestros servicios.
+
+Especialistas en instalaciones de red, certificados en sistemas de seguridad, con más de 12 años de experiencia en el rubro de la informática.
+
+PYME 100% Hondureña.
+
+SECTOR:
+Servicios y tecnologías de la información :contentReference[oaicite:0]{index=0}
+
+UBICACIÓN:
+Tegucigalpa, Honduras
+
+EXPERIENCIA:
+Más de 12 años en el área tecnológica :contentReference[oaicite:1]{index=1}
+
+====================================
+MENÚ / ESTRUCTURA DEL SITIO
+====================================
+
+- Inicio
+- Helpdesk
+- Redes y Software
+    - Redes
+    - Vídeo Vigilancia
+    - AntiVirus
+    - Servicios en la Nube
+- Educación
+- Contáctenos
+- Portal de Ayuda
+- Términos y Condiciones
+
+====================================
+SECCIÓN: INICIO
+====================================
+
+TÍTULO:
+Sobre Nosotros
+
+DESCRIPCIÓN:
+Somos una empresa cloud de innovaciones tecnológicas comprometida con brindar soluciones de alto nivel a nuestros clientes, ejecutándolas en tiempos establecidos bajo normativas SLA, optimizando costos y agregando valor a cada uno de nuestros servicios.
+
+Especialistas en Instalaciones de Red, certificados en instalaciones de Sistemas de Seguridad, con más de 12 años de experiencia en informática.
+
+PYME 100% Hondureña.
+
+====================================
+SECCIÓN: HELPDESK
+====================================
+
+TÍTULO:
+Helpdesk
+
+DESCRIPCIÓN:
+Nuestro Geek Squad brinda múltiples servicios generales especializados, con profesionales certificados para servir calidad.
+
+SERVICIOS:
+- Instalación, mantenimiento y reparación de electricidad residencial
+- Reparación de computadores
+
+====================================
+SECCIÓN: REDES
+====================================
+
+TÍTULO:
+Redes
+
+DESCRIPCIÓN:
+Soporte en redes, implementación de soluciones para control de accesos a sitios web, apoyo al departamento de informática en instalaciones de puntos de red, configuraciones básicas de equipos Wi-Fi e instalación de cableado estructurado certificado.
+
+====================================
+SECCIÓN: VÍDEO VIGILANCIA
+====================================
+
+TÍTULO:
+Vídeo Vigilancia
+
+DESCRIPCIÓN:
+Distribuidores autorizados de equipos de vigilancia HIKVISION, con personal certificado en implementación de soluciones de seguridad física.
+
+====================================
+SECCIÓN: ANTIVIRUS
+====================================
+
+TÍTULO:
+AntiVirus
+
+DESCRIPCIÓN:
+Mantenga segura su información personal con soluciones antivirus. Somos socios de Kaspersky y brindamos soluciones adaptadas a hogares y empresas.
+
+====================================
+SECCIÓN: SERVICIOS EN LA NUBE
+====================================
+
+TÍTULO:
+Servicios en la Nube
+
+DESCRIPCIÓN:
+Optimice recursos mediante servicios cloud. Implementación de soluciones SaaS, respaldos automáticos, administración centralizada y monitoreo de infraestructura tecnológica.
+
+====================================
+SECCIÓN: EDUCACIÓN
+====================================
+
+TÍTULO:
+Educación
+
+DESCRIPCIÓN:
+Galería de eventos y charlas de emprendimiento tecnológico en colegios y universidades.
+
+CONTENIDO:
+- Podcast de tecnología, emprendimiento y desarrollo profesional
+- Meeting Pro-Gamers
+- Charlas de PC de alto rendimiento y eSports
+- Taller Arduino (UNAH)
+- Coaching en CUTEC
+- Taller de Robótica UNITEC
+- Charlas en Instituto Renacimiento
+
+====================================
+SECCIÓN: CONTACTO
+====================================
+
+TÍTULO:
+Contáctenos
+
+DESCRIPCIÓN:
+Si tienes alguna consulta puedes escribirnos o llamarnos.
+
+HORARIO:
+Lunes a viernes de 8:00 am a 5:00 pm
+
+DATOS:
+Correo: consultas@geeksolutionhn.com
+WhatsApp: +504 3383-7341
+Teléfono: +504 2213-0624
+
+====================================
+SECCIÓN: PORTAL DE AYUDA
+====================================
+
+TÍTULO:
+Soporte Técnico
+
+DESCRIPCIÓN:
+Garantizamos continuidad, disponibilidad y calidad del servicio. Acceso a portal corporativo para soporte técnico.
+
+BOTÓN:
+Acceso a portal de asistencia
+
+====================================
+SECCIÓN: TÉRMINOS Y CONDICIONES
+====================================
+
+RESUMEN:
+
+INGRESO DE EQUIPOS:
+- Ticket obligatorio
+- Tiempo de revisión hasta 4 días
+- No responsabilidad por configuraciones personales
+- Respaldo es responsabilidad del cliente
+
+COSTOS:
+- Diagnóstico: L. 900
+- Consultoría: L. 2,000 (local) / L. 3,700 (fuera)
+
+GARANTÍA:
+- 1 mes en reparaciones
+- No aplica por daños de terceros
+- Equipos no retirados en 30 días se reciclan
+
+PAGOS:
+- Tarjeta, transferencia, cheque
+- Facturación con CAI
+- Penalización por cheque rebotado: L. 900
+
+====================================
+SERVICIOS GENERALES
+====================================
+
+- Helpdesk y soporte técnico
+- Redes y cableado estructurado
+- Configuración WiFi
+- Seguridad y videovigilancia
+- Antivirus empresarial
+- Soluciones cloud
+- SaaS
+- Respaldos automáticos
+- Administración de infraestructura
+- Educación tecnológica
+
+====================================
+FOOTER
+====================================
+
+Departamento Técnico
+Oficina Virtual
+SAC: +504 2213-0624 / +504 3383-7341
+
+====================================
+IDENTIDAD VISUAL (PARA CODEX)
+====================================
+
+- Estilo tecnológico corporativo
+- Colores: azul, blanco, gris
+- Diseño moderno 2026
+- UI limpia y minimalista
+- Tarjetas de servicios
+- Animaciones suaves
+- Responsive
+
+====================================
+REQUISITOS TÉCNICOS
+====================================
+
+- React + Tailwind CSS
+- Código modular
+- Escalable
+- Responsive
+- SEO básico
+- Botón WhatsApp
+- Formulario contacto
+
+====================================
+INSTRUCCIÓN FINAL PARA CODEX
+====================================
+
+Rediseña este sitio como una web moderna corporativa 2026, manteniendo la estructura pero mejorando diseño, UX, UI y presentación visual profesional.
