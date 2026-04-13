@@ -10,7 +10,7 @@ function ServicesPage() {
     <main className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
       <MotionSection {...fadeUp}>
         <SectionTag>Servicios</SectionTag>
-        <h1 className={`mt-6 max-w-4xl font-display text-5xl font-semibold leading-none tracking-[-0.06em] sm:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
+        <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
           Un portafolio real para helpdesk, redes, seguridad, antivirus, cloud y educación.
         </h1>
         <p className={`mt-6 max-w-3xl text-base leading-8 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
@@ -28,7 +28,7 @@ function ServicesPage() {
             transition={{ duration: 0.6, delay: index * 0.05 }}
             className={`rounded-[1.8rem] border p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1.5 ${isLight ? 'border-slate-200 bg-white/80 hover:border-cyan-300/40' : 'border-white/10 bg-white/[0.04] hover:border-cyan-300/30'}`}
           >
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">{service.eyebrow}</p>
+            <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>{service.eyebrow}</p>
             <h2 className={`mt-5 font-display text-2xl font-semibold tracking-[-0.04em] ${isLight ? 'text-slate-950' : 'text-white'}`}>{service.title}</h2>
             <p className={`mt-4 text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>{service.description}</p>
             <div className="mt-6 flex flex-wrap gap-2">

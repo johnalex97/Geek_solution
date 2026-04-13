@@ -10,7 +10,7 @@ function PortalPage() {
     <main className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
       <MotionSection {...fadeUp} className={`rounded-[2rem] border p-8 backdrop-blur-sm ${isLight ? 'border-cyan-100 bg-[linear-gradient(180deg,rgba(186,230,253,0.55),rgba(255,255,255,0.9))]' : 'border-white/10 bg-[linear-gradient(180deg,rgba(34,211,238,0.08),rgba(255,255,255,0.03))]'}`}>
         <SectionTag>Portal de Ayuda</SectionTag>
-        <h1 className={`mt-6 max-w-4xl font-display text-5xl font-semibold leading-none tracking-[-0.06em] sm:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
+        <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
           Soporte técnico orientado a continuidad, disponibilidad y calidad del servicio.
         </h1>
         <p className={`mt-6 max-w-3xl text-base leading-8 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>

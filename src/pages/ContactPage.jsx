@@ -116,7 +116,7 @@ function ContactPage() {
       <MotionSection {...fadeUp} className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
         <div className={`rounded-[2rem] border p-7 backdrop-blur-sm ${isLight ? 'border-slate-200 bg-white/80' : 'border-white/10 bg-white/[0.04]'}`}>
           <SectionTag>Contacto</SectionTag>
-          <h1 className={`mt-6 font-display text-5xl font-semibold leading-none tracking-[-0.06em] sm:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
+          <h1 className={`mt-6 font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
             Si tienes alguna consulta puedes escribirnos o llamarnos.
           </h1>
           <p className={`mt-5 text-base leading-8 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
@@ -142,7 +142,7 @@ function ContactPage() {
         <div className={`rounded-[2rem] border p-7 backdrop-blur-sm ${isLight ? 'border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(239,246,255,0.92))]' : 'border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]'}`}>
           <form className="grid gap-5" onSubmit={handleSubmit}>
             <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">Formulario</p>
+              <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>Formulario</p>
               <h2 className={`mt-4 font-display text-3xl font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Solicite una asesoría técnica</h2>
               <p className={`mt-3 text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
                 Complete sus datos y enviaremos la consulta al canal configurado de atención comercial.

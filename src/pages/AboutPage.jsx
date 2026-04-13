@@ -11,7 +11,7 @@ function AboutPage() {
       <MotionSection {...fadeUp} className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <SectionTag>Nosotros</SectionTag>
-          <h1 className={`mt-6 font-display text-5xl font-semibold leading-none tracking-[-0.06em] sm:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
+          <h1 className={`mt-6 font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
             Una PYME hondureña enfocada en soluciones tecnológicas de alto nivel.
           </h1>
           <p className={`mt-6 max-w-3xl text-base leading-8 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>

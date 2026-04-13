@@ -10,10 +10,10 @@ function HomePage() {
   return (
     <main>
       <section className="relative pt-32 sm:pt-36">
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 sm:px-6 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
           <MotionDiv {...fadeUp} className="relative">
             <SectionTag>Geek Solution</SectionTag>
-            <h1 className={`mt-6 max-w-4xl font-display text-5xl font-semibold leading-none tracking-[-0.06em] sm:text-6xl lg:text-7xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
+            <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl xl:text-7xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
               Soluciones tecnologicas de alto nivel para soporte, redes, seguridad y nube.
             </h1>
             <p className={`mt-7 max-w-2xl text-base leading-8 sm:text-lg ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
@@ -46,7 +46,7 @@ function HomePage() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
               <div className="grid gap-5">
                 <div className="rounded-[1.75rem] border border-cyan-300/14 bg-[linear-gradient(135deg,rgba(8,145,178,0.18),rgba(37,99,235,0.08))] p-6">
-                  <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">Operacion segura</p>
+                  <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>Operacion segura</p>
                   <h2 className={`mt-4 font-display text-3xl font-semibold tracking-[-0.05em] ${isLight ? 'text-slate-950' : 'text-white'}`}>
                     Especialistas en instalaciones de red y sistemas de seguridad.
                   </h2>
@@ -57,7 +57,7 @@ function HomePage() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className={`rounded-[1.5rem] border p-5 ${isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-slate-950/80'}`}>
-                    <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-slate-500' : 'text-slate-500'}`}>Especialidad</p>
+                    <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Especialidad</p>
                     <p className={`mt-3 font-display text-xl ${isLight ? 'text-slate-950' : 'text-white'}`}>Helpdesk, redes, seguridad y cloud</p>
                   </div>
                   <div className={`rounded-[1.5rem] border p-5 ${isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-slate-950/80'}`}>
@@ -90,7 +90,7 @@ function HomePage() {
               className={`group relative overflow-hidden rounded-[1.8rem] border p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1.5 ${isLight ? 'border-slate-200 bg-white/80 hover:border-cyan-300/40 hover:bg-white' : 'border-white/10 bg-white/[0.04] hover:border-cyan-300/30 hover:bg-white/[0.06]'}`}
             >
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent opacity-0 transition group-hover:opacity-100" />
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">{service.eyebrow}</p>
+              <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>{service.eyebrow}</p>
               <h3 className={`mt-5 font-display text-2xl font-semibold tracking-[-0.04em] ${isLight ? 'text-slate-950' : 'text-white'}`}>{service.title}</h3>
               <p className={`mt-4 text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>{service.description}</p>
             </MotionArticle>

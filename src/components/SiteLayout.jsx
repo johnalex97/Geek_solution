@@ -53,7 +53,7 @@ function SiteLayout() {
               />
             </div>
             <div className="min-w-0">
-              <p className={`font-display text-sm font-semibold uppercase tracking-[0.28em] ${isLight ? 'text-slate-950' : 'text-white'}`}>Geek Solution</p>
+              <p className={`truncate font-display text-sm font-semibold uppercase tracking-[0.16em] sm:tracking-[0.28em] ${isLight ? 'text-slate-950' : 'text-white'}`}>Geek Solution</p>
               <p className={`hidden text-xs sm:block ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Soporte, redes, seguridad y servicios cloud</p>
             </div>
           </NavLink>
