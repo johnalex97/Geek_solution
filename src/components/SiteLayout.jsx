@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { companyProfile, navItems } from '../data/siteContent.js'
-import { IconArrow, IconClose, IconMenu } from './ui.jsx'
+import { useTheme } from './theme.jsx'
+import { IconArrow, IconClose, IconMenu, IconMoon, IconSun } from './ui.jsx'
 
-function NavItem({ to, children, onClick }) {
+function NavItem({ to, children, onClick, isLight }) {
   return (
     <NavLink
       to={to}
       onClick={onClick}
       className={({ isActive }) =>
-        `text-sm transition hover:text-white ${isActive ? 'text-white' : 'text-slate-300'}`
+        `text-sm transition ${isLight ? 'hover:text-slate-950' : 'hover:text-white'} ${isActive ? (isLight ? 'text-slate-950' : 'text-white') : (isLight ? 'text-slate-600' : 'text-slate-300')}`
       }
     >
       {children}
@@ -19,59 +20,117 @@ function NavItem({ to, children, onClick }) {
 
 function SiteLayout() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { isLight, toggleTheme } = useTheme()
+  const portalItem = navItems.find((item) => item.to === '/portal-ayuda')
+  const primaryNavItems = navItems.filter((item) => item.to !== '/portal-ayuda')
 
   return (
-    <div className="relative overflow-x-hidden bg-bg text-slate-200">
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.14),_transparent_22%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.16),_transparent_18%),linear-gradient(180deg,_#050816_0%,_#07101d_34%,_#091221_100%)]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-40 [background-image:linear-gradient(rgba(125,211,252,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(125,211,252,0.08)_1px,transparent_1px)] [background-size:72px_72px]" />
-      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.18),_transparent_60%)] blur-3xl" />
+    <div className="theme-shell relative overflow-x-hidden">
+      <div
+        className={`pointer-events-none fixed inset-0 -z-10 ${
+          isLight
+            ? 'bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.14),_transparent_24%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.12),_transparent_18%),linear-gradient(180deg,_#f8fbff_0%,_#eef6ff_36%,_#dbeafe_100%)]'
+            : 'bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.14),_transparent_22%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.16),_transparent_18%),linear-gradient(180deg,_#050816_0%,_#07101d_34%,_#091221_100%)]'
+        }`}
+      />
+      <div className="theme-light-grid pointer-events-none fixed inset-0 -z-10 opacity-40 [background-size:72px_72px]" />
+      <div
+        className={`pointer-events-none fixed inset-x-0 top-0 -z-10 h-96 blur-3xl ${
+          isLight
+            ? 'bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.12),_transparent_60%)]'
+            : 'bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.18),_transparent_60%)]'
+        }`}
+      />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/65 backdrop-blur-xl">
+      <header className="theme-header fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl">
         <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="grid size-11 place-items-center rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/20 to-blue-500/20 shadow-[0_0_40px_rgba(34,211,238,0.15)]">
-              <span className="font-display text-sm font-bold tracking-[0.3em] text-white">GS</span>
+            <div className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-white shadow-[0_0_40px_rgba(34,211,238,0.12)]">
+              <img
+                src="/logo-geek-solution.jpg"
+                alt="Logo de Geek Solution"
+                className="size-11 object-cover"
+              />
             </div>
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.28em] text-white">Geek Solution</p>
-              <p className="text-xs text-slate-400">Soporte, redes, seguridad y servicios cloud</p>
+              <p className={`font-display text-sm font-semibold uppercase tracking-[0.28em] ${isLight ? 'text-slate-950' : 'text-white'}`}>Geek Solution</p>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Soporte, redes, seguridad y servicios cloud</p>
             </div>
           </NavLink>
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {navItems.map((item) => (
-              <NavItem key={item.to} to={item.to}>
+            {primaryNavItems.map((item) => (
+              <NavItem key={item.to} to={item.to} isLight={isLight}>
                 {item.label}
               </NavItem>
             ))}
             <NavLink
               to="/contacto"
-              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-3 text-sm font-medium text-cyan-100 transition duration-300 hover:-translate-y-0.5 hover:border-cyan-300/50 hover:bg-cyan-300/14"
+              className={`inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${
+                isLight
+                  ? 'border-cyan-500/30 bg-cyan-500 text-white hover:border-cyan-600 hover:bg-cyan-600'
+                  : 'border-cyan-400/30 bg-cyan-400/10 text-cyan-100 hover:border-cyan-300/50 hover:bg-cyan-300/14'
+              }`}
             >
               Solicitar consulta
               <IconArrow />
             </NavLink>
+            {portalItem ? (
+              <NavItem to={portalItem.to} isLight={isLight}>
+                {portalItem.label}
+              </NavItem>
+            ) : null}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={`inline-flex size-11 items-center justify-center rounded-2xl border transition ${
+                isLight
+                  ? 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                  : 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+              }`}
+              aria-label={isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
+            >
+              {isLight ? <IconMoon /> : <IconSun />}
+            </button>
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen((value) => !value)}
-            className="inline-flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:bg-white/10 lg:hidden"
-            aria-label="Abrir menu"
-          >
-            {menuOpen ? <IconClose /> : <IconMenu />}
-          </button>
+          <div className="flex items-center gap-3 lg:hidden">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={`inline-flex size-11 items-center justify-center rounded-2xl border transition ${
+                isLight
+                  ? 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                  : 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+              }`}
+              aria-label={isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
+            >
+              {isLight ? <IconMoon /> : <IconSun />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              className={`inline-flex size-11 items-center justify-center rounded-2xl border transition ${
+                isLight
+                  ? 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                  : 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+              }`}
+              aria-label="Abrir menu"
+            >
+              {menuOpen ? <IconClose /> : <IconMenu />}
+            </button>
+          </div>
         </div>
 
         {menuOpen ? (
-          <div className="border-t border-white/10 bg-slate-950/95 px-5 py-5 backdrop-blur-xl lg:hidden">
+          <div className={`border-t px-5 py-5 backdrop-blur-xl lg:hidden ${isLight ? 'border-slate-200 bg-white/95' : 'border-white/10 bg-slate-950/95'}`}>
             <div className="mx-auto flex max-w-7xl flex-col gap-3">
-              {navItems.map((item) => (
+              {primaryNavItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-2xl border border-white/8 bg-white/4 px-4 py-3 text-sm text-slate-200"
+                  className={`rounded-2xl border px-4 py-3 text-sm ${isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/8 bg-white/4 text-slate-200'}`}
                 >
                   {item.label}
                 </NavLink>
@@ -84,6 +143,15 @@ function SiteLayout() {
                 Solicitar consulta
                 <IconArrow />
               </NavLink>
+              {portalItem ? (
+                <NavLink
+                  to={portalItem.to}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-2xl border px-4 py-3 text-sm ${isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/8 bg-white/4 text-slate-200'}`}
+                >
+                  {portalItem.label}
+                </NavLink>
+              ) : null}
             </div>
           </div>
         ) : null}
@@ -91,20 +159,29 @@ function SiteLayout() {
 
       <Outlet />
 
-      <footer className="border-t border-white/10">
+      <footer className={`border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div>
-            <p className="font-display text-xl font-semibold text-white">Geek Solution</p>
-            <p className="mt-2 text-sm text-slate-400">
-              {companyProfile.summary}
-            </p>
-            <p className="mt-2 text-sm text-slate-500">{companyProfile.supportSummary}</p>
+          <div className="flex items-center gap-4">
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/95">
+              <img
+                src="/logo-geek-solution.jpg"
+                alt="Logo de Geek Solution"
+                className="size-14 object-cover"
+              />
+            </div>
+            <div>
+              <p className={`font-display text-xl font-semibold ${isLight ? 'text-slate-950' : 'text-white'}`}>Geek Solution</p>
+              <p className={`mt-2 text-sm ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
+                {companyProfile.summary}
+              </p>
+              <p className={`mt-2 text-sm ${isLight ? 'text-slate-500' : 'text-slate-500'}`}>{companyProfile.supportSummary}</p>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-5 text-sm text-slate-400">
-            <NavLink to="/" className="transition hover:text-white">Inicio</NavLink>
-            <NavLink to="/servicios" className="transition hover:text-white">Servicios</NavLink>
-            <NavLink to="/portal-ayuda" className="transition hover:text-white">Portal</NavLink>
-            <NavLink to="/terminos" className="transition hover:text-white">Terminos</NavLink>
+          <div className={`flex flex-wrap gap-5 text-sm ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>
+            <NavLink to="/" className={`transition ${isLight ? 'hover:text-slate-950' : 'hover:text-white'}`}>Inicio</NavLink>
+            <NavLink to="/servicios" className={`transition ${isLight ? 'hover:text-slate-950' : 'hover:text-white'}`}>Servicios</NavLink>
+            <NavLink to="/portal-ayuda" className={`transition ${isLight ? 'hover:text-slate-950' : 'hover:text-white'}`}>Portal</NavLink>
+            <NavLink to="/terminos" className={`transition ${isLight ? 'hover:text-slate-950' : 'hover:text-white'}`}>Términos</NavLink>
           </div>
         </div>
       </footer>

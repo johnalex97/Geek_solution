@@ -3,70 +3,71 @@ export const navItems = [
   { label: 'Servicios', to: '/servicios' },
   { label: 'Nosotros', to: '/nosotros' },
   { label: 'Contacto', to: '/contacto' },
+  { label: 'Términos', to: '/terminos' },
   { label: 'Portal', to: '/portal-ayuda' },
 ]
 
 export const stats = [
-  { value: '12+', label: 'anos de experiencia en informatica' },
-  { value: 'SLA', label: 'ejecucion con tiempos definidos' },
-  { value: '100%', label: 'pyme hondurena' },
+  { value: '12+', label: 'años de experiencia en informática' },
+  { value: 'SLA', label: 'ejecución con tiempos definidos' },
+  { value: '100%', label: 'pyme hondureña' },
 ]
 
 export const services = [
   {
     eyebrow: 'Helpdesk',
-    title: 'Soporte tecnico general especializado',
+    title: 'Soporte técnico general especializado',
     description:
-      'Nuestro Geek Squad brinda multiples servicios generales especializados con profesionales certificados para servir calidad.',
-    bullets: ['Helpdesk', 'Reparacion de computadores', 'Electricidad residencial'],
+      'Nuestro Geek Squad brinda múltiples servicios generales especializados con profesionales certificados para servir calidad.',
+    bullets: ['Helpdesk', 'Reparación de computadores', 'Electricidad residencial'],
   },
   {
     eyebrow: 'Redes',
-    title: 'Implementacion, conectividad y cableado estructurado',
+    title: 'Implementación, conectividad y cableado estructurado',
     description:
-      'Soporte en redes, control de accesos a sitios web, apoyo a departamentos de informatica, configuraciones basicas Wi-Fi e instalacion de cableado estructurado certificado.',
-    bullets: ['Puntos de red', 'Wi-Fi basico', 'Cableado certificado'],
+      'Soporte en redes, control de accesos a sitios web, apoyo a departamentos de informática, configuraciones básicas Wi-Fi e instalación de cableado estructurado certificado.',
+    bullets: ['Puntos de red', 'Wi-Fi básico', 'Cableado certificado'],
   },
   {
     eyebrow: 'Video Vigilancia',
-    title: 'Seguridad fisica con implementacion certificada',
+    title: 'Seguridad física con implementación certificada',
     description:
-      'Distribuidores autorizados de equipos de vigilancia HIKVISION con personal certificado en implementacion de soluciones de seguridad fisica.',
-    bullets: ['HIKVISION', 'Implementacion certificada', 'Seguridad fisica'],
+      'Distribuidores autorizados de equipos de vigilancia HIKVISION con personal certificado en implementación de soluciones de seguridad física.',
+    bullets: ['HIKVISION', 'Implementación certificada', 'Seguridad física'],
   },
   {
     eyebrow: 'AntiVirus',
-    title: 'Proteccion para hogares y empresas',
+    title: 'Protección para hogares y empresas',
     description:
-      'Mantenga segura su informacion personal con soluciones antivirus. Somos socios de Kaspersky y brindamos proteccion adaptada a hogares y empresas.',
+      'Mantenga segura su información personal con soluciones antivirus. Somos socios de Kaspersky y brindamos protección adaptada a hogares y empresas.',
     bullets: ['Kaspersky', 'Hogares', 'Empresas'],
   },
   {
     eyebrow: 'Cloud',
-    title: 'Servicios en la nube y administracion centralizada',
+    title: 'Servicios en la nube y administración centralizada',
     description:
-      'Optimice recursos mediante servicios cloud, implementacion SaaS, respaldos automaticos, administracion centralizada y monitoreo de infraestructura tecnologica.',
-    bullets: ['SaaS', 'Respaldos automaticos', 'Monitoreo'],
+      'Optimice recursos mediante servicios cloud, implementación SaaS, respaldos automáticos, administración centralizada y monitoreo de infraestructura tecnológica.',
+    bullets: ['SaaS', 'Respaldos automáticos', 'Monitoreo'],
   },
   {
-    eyebrow: 'Educacion',
-    title: 'Charlas, talleres y formacion tecnologica',
+    eyebrow: 'Educación',
+    title: 'Charlas, talleres y formación tecnológica',
     description:
-      'Galeria de eventos y charlas de emprendimiento tecnologico en colegios y universidades, con actividades orientadas a desarrollo profesional y tecnologia aplicada.',
-    bullets: ['Podcast', 'Arduino', 'Robotica'],
+      'Galería de eventos y charlas de emprendimiento tecnológico en colegios y universidades, con actividades orientadas a desarrollo profesional y tecnología aplicada.',
+    bullets: ['Podcast', 'Arduino', 'Robótica'],
   },
 ]
 
 export const pillars = [
-  'Somos una empresa cloud de innovaciones tecnologicas comprometida con brindar soluciones de alto nivel a nuestros clientes.',
+  'Somos una empresa cloud de innovaciones tecnológicas comprometida con brindar soluciones de alto nivel a nuestros clientes.',
   'Ejecutamos servicios en tiempos establecidos bajo normativas SLA, optimizando costos y agregando valor en cada entrega.',
   'Somos especialistas en instalaciones de red y contamos con certificaciones en sistemas de seguridad.',
-  'Nuestra experiencia supera los 12 anos en el rubro de la informatica como PYME 100% hondurena.',
+  'Nuestra experiencia supera los 12 años en el rubro de la informática como PYME 100% hondureña.',
 ]
 
 export const contactCards = [
   { label: 'Correo', value: 'consultas@geeksolutionhn.com', href: 'mailto:consultas@geeksolutionhn.com' },
-  { label: 'Telefono', value: '+504 2213-0624', href: 'tel:+50422130624' },
+  { label: 'Teléfono', value: '+504 2213-0624', href: 'tel:+50422130624' },
   { label: 'WhatsApp', value: '+504 3383-7341', href: 'https://wa.me/50433837341' },
   { label: 'Horario', value: 'Lunes a viernes · 8:00 am a 5:00 pm' },
 ]
@@ -75,33 +76,33 @@ export const termsBlocks = [
   {
     title: 'Ingreso de equipos',
     items: [
-      'Ticket obligatorio para recepcion',
-      'Tiempo de revision de hasta 4 dias',
+      'Ticket obligatorio para recepción',
+      'Tiempo de revisión de hasta 4 días',
       'No hay responsabilidad por configuraciones personales',
-      'El respaldo de informacion es responsabilidad del cliente',
+      'El respaldo de información es responsabilidad del cliente',
     ],
   },
   {
     title: 'Costos',
-    items: ['Diagnostico: L. 900', 'Consultoria local: L. 2,000', 'Consultoria fuera de la ciudad: L. 3,700'],
+    items: ['Diagnóstico: L. 900', 'Consultoría local: L. 2,000', 'Consultoría fuera de la ciudad: L. 3,700'],
   },
   {
-    title: 'Garantia',
-    items: ['1 mes en reparaciones', 'No aplica por danos de terceros', 'Equipos no retirados en 30 dias se reciclan'],
+    title: 'Garantía',
+    items: ['1 mes en reparaciones', 'No aplica por daños de terceros', 'Equipos no retirados en 30 días se reciclan'],
   },
   {
     title: 'Pagos',
-    items: ['Tarjeta, transferencia y cheque', 'Facturacion con CAI', 'Penalizacion por cheque rebotado: L. 900'],
+    items: ['Tarjeta, transferencia y cheque', 'Facturación con CAI', 'Penalización por cheque rebotado: L. 900'],
   },
 ]
 
 export const educationHighlights = [
-  'Podcast de tecnologia, emprendimiento y desarrollo profesional',
+  'Podcast de tecnología, emprendimiento y desarrollo profesional',
   'Meeting Pro-Gamers',
   'Charlas de PC de alto rendimiento y eSports',
   'Taller Arduino en UNAH',
   'Coaching en CUTEC',
-  'Taller de Robotica en UNITEC',
+  'Taller de Robótica en UNITEC',
   'Charlas en Instituto Renacimiento',
 ]
 
@@ -109,7 +110,7 @@ export const companyProfile = {
   name: 'Geek Solution',
   location: 'Tegucigalpa, Honduras',
   summary:
-    'Empresa cloud de innovaciones tecnologicas comprometida con brindar soluciones de alto nivel, ejecutadas bajo normativas SLA, optimizando costos y agregando valor a cada servicio.',
+    'Empresa cloud de innovaciones tecnológicas comprometida con brindar soluciones de alto nivel, ejecutadas bajo normativas SLA, optimizando costos y agregando valor a cada servicio.',
   supportSummary:
-    'Departamento Tecnico, Oficina Virtual y SAC mediante +504 2213-0624 y +504 3383-7341.',
+    'Departamento Técnico, Oficina Virtual y SAC mediante +504 2213-0624 y +504 3383-7341.',
 }
