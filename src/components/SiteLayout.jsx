@@ -44,17 +44,17 @@ function SiteLayout() {
 
       <header className="theme-header fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl">
         <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
-          <NavLink to="/" className="flex items-center gap-3">
-            <div className="overflow-hidden rounded-2xl border border-cyan-400/20 bg-white shadow-[0_0_40px_rgba(34,211,238,0.12)]">
+          <NavLink to="/" className="flex min-w-0 items-center gap-3">
+            <div className="shrink-0 overflow-hidden rounded-2xl border border-cyan-400/20 bg-white shadow-[0_0_40px_rgba(34,211,238,0.12)]">
               <img
                 src="/logo-geek-solution.jpg"
                 alt="Logo de Geek Solution"
                 className="size-11 object-cover"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <p className={`font-display text-sm font-semibold uppercase tracking-[0.28em] ${isLight ? 'text-slate-950' : 'text-white'}`}>Geek Solution</p>
-              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Soporte, redes, seguridad y servicios cloud</p>
+              <p className={`hidden text-xs sm:block ${isLight ? 'text-slate-600' : 'text-slate-400'}`}>Soporte, redes, seguridad y servicios cloud</p>
             </div>
           </NavLink>
 
@@ -161,8 +161,8 @@ function SiteLayout() {
 
       <footer className={`border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div className="flex items-center gap-4">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/95">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-white/95">
               <img
                 src="/logo-geek-solution.jpg"
                 alt="Logo de Geek Solution"

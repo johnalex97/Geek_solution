@@ -35,6 +35,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background: var(--page-bg);
   color: var(--page-text);
