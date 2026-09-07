@@ -112,7 +112,7 @@ function ContactPage() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
       <MotionSection {...fadeUp} className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
         <div className={`rounded-[2rem] border p-7 backdrop-blur-sm ${isLight ? 'border-slate-200 bg-white/80' : 'border-white/10 bg-white/[0.04]'}`}>
           <SectionTag>Contacto</SectionTag>

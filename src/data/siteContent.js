@@ -7,6 +7,37 @@ export const navItems = [
   { label: 'Portal', to: '/portal-ayuda' },
 ]
 
+export const pageMeta = {
+  '/': {
+    title: 'Geek Solution | Soporte, redes y servicios cloud en Honduras',
+    description: 'Soluciones de soporte técnico, redes, seguridad y cloud para empresas y hogares en Honduras. Conoce Geek Solution y solicita asesoría.',
+  },
+  '/servicios': {
+    title: 'Servicios tecnológicos | Geek Solution',
+    description: 'Explora nuestros servicios de soporte técnico, redes, videovigilancia, antivirus, cloud y educación tecnológica.',
+  },
+  '/nosotros': {
+    title: 'Nosotros | Geek Solution',
+    description: 'Conoce a Geek Solution, una pyme hondureña con más de 12 años de experiencia en informática y servicios ejecutados bajo normativas SLA.',
+  },
+  '/contacto': {
+    title: 'Contacto y asesoría | Geek Solution',
+    description: 'Cuéntanos qué necesitas resolver. Contacta a Geek Solution en Tegucigalpa por formulario, teléfono, correo o WhatsApp.',
+  },
+  '/portal-ayuda': {
+    title: 'Portal de soporte | Geek Solution',
+    description: 'Accede al portal de soporte de Geek Solution para gestionar tus solicitudes y dar seguimiento a tus tickets.',
+  },
+  '/terminos': {
+    title: 'Términos y condiciones | Geek Solution',
+    description: 'Consulta las condiciones de ingreso de equipos, diagnóstico, costos, garantía y pagos de los servicios de Geek Solution.',
+  },
+  '*': {
+    title: 'Página no encontrada | Geek Solution',
+    description: 'No encontramos esta página. Vuelve al inicio de Geek Solution, contáctanos o accede al portal de soporte.',
+  },
+}
+
 export const stats = [
   { value: '12+', label: 'años de experiencia en informática' },
   { value: 'SLA', label: 'ejecución con tiempos definidos' },

@@ -7,7 +7,7 @@ function AboutPage() {
   const { isLight } = useTheme()
 
   return (
-    <main className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
       <MotionSection {...fadeUp} className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <SectionTag>Nosotros</SectionTag>

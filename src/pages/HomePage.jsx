@@ -8,7 +8,7 @@ function HomePage() {
   const { isLight } = useTheme()
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <section className="relative pt-32 sm:pt-36">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 sm:px-6 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
           <MotionDiv {...fadeUp} className="relative">
