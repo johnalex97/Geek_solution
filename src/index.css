@@ -1,31 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-display: "Sora", sans-serif;
-  --color-bg: #050816;
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 :root {
-  --page-bg: #050816;
-  --page-text: #e2e8f0;
-  --surface-1: rgba(255, 255, 255, 0.04);
-  --surface-2: rgba(2, 6, 23, 0.78);
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --muted-text: #94a3b8;
-  --header-bg: rgba(2, 6, 23, 0.65);
-}
-
-:root[data-theme='light'] {
-  --color-bg: #eef6ff;
-  --page-bg: #eef6ff;
-  --page-text: #0f172a;
-  --surface-1: rgba(255, 255, 255, 0.84);
-  --surface-2: rgba(255, 255, 255, 0.92);
-  --surface-border: rgba(15, 23, 42, 0.08);
-  --muted-text: #475569;
-  --header-bg: rgba(255, 255, 255, 0.72);
+  color-scheme: light;
+  --geek-green: #00a859;
+  --signal-green: #39e58c;
+  --ink: #0b0f0d;
+  --graphite: #18201c;
+  --paper: #f5f8f6;
+  --technical-gray: #66736c;
 }
 
 html {
@@ -36,55 +25,33 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  font-family: var(--font-sans);
-  background: var(--page-bg);
-  color: var(--page-text);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 * {
   box-sizing: border-box;
 }
 
-::selection {
-  background: rgba(34, 211, 238, 0.3);
-  color: #f8fafc;
+:focus-visible {
+  outline: 3px solid #007a3f;
+  outline-offset: 3px;
 }
 
-.font-display {
-  font-family: var(--font-display);
+[id] {
+  scroll-margin-top: 7rem;
 }
 
-.theme-shell {
-  background: var(--page-bg);
-  color: var(--page-text);
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.theme-surface {
-  background: var(--surface-1);
-  border-color: var(--surface-border);
-}
-
-.theme-surface-strong {
-  background: var(--surface-2);
-  border-color: var(--surface-border);
-}
-
-.theme-muted {
-  color: var(--muted-text);
-}
-
-.theme-header {
-  background: var(--header-bg);
-  border-color: var(--surface-border);
-}
-
-.theme-light-grid {
-  opacity: 0;
-}
-
-:root[data-theme='light'] .theme-light-grid {
-  opacity: 0.24;
-  background-image:
-    linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
