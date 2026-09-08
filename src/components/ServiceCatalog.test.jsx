@@ -23,6 +23,26 @@ describe('ServiceCatalog', () => {
     expect(screen.getByText('?categoria=redes')).toBeInTheDocument()
   })
 
+  it('clears the category query and renders every service when Todos is selected', async () => {
+    const user = userEvent.setup()
+    render(
+      <MemoryRouter initialEntries={['/servicios?categoria=cloud']}>
+        <ServiceCatalog services={services} />
+        <LocationProbe />
+      </MemoryRouter>,
+    )
+    expect(screen.getByText('?categoria=cloud')).toBeInTheDocument()
+    expect(screen.queryByText('Redes administradas')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Todos' }))
+
+    expect(screen.getByRole('status')).toBeEmptyDOMElement()
+    expect(screen.getByRole('button', { name: 'Todos' })).toHaveAttribute('aria-pressed', 'true')
+    for (const service of services) {
+      expect(screen.getByRole('heading', { name: service.title })).toBeInTheDocument()
+    }
+  })
+
   it.each([
     {
       initialEntry: '/servicios?categoria=redes',

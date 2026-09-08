@@ -11,7 +11,7 @@ const sectionIds = {
 function TermsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
-      <PageMeta {...pageMeta['/terminos']} title="Términos de servicio | Geek Solution" />
+      <PageMeta {...pageMeta['/terminos']} />
       <header className="max-w-4xl">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#007a3f]">Términos de servicio</p>
         <h1 className="mt-6 text-balance font-display text-[2.6rem] font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl">Condiciones claras para cada servicio.</h1>

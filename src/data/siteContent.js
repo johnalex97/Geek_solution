@@ -29,7 +29,7 @@ export const pageMeta = {
     description: 'Accede al portal de soporte de Geek Solution para gestionar tus solicitudes y dar seguimiento a tus tickets.',
   },
   '/terminos': {
-    title: 'Términos y condiciones | Geek Solution',
+    title: 'Términos de servicio | Geek Solution',
     description: 'Consulta las condiciones de ingreso de equipos, diagnóstico, costos, garantía y pagos de los servicios de Geek Solution.',
   },
   '*': {
