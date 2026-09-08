@@ -49,48 +49,60 @@ export const services = [
     slug: 'soporte',
     eyebrow: 'Helpdesk',
     title: 'Soporte técnico general especializado',
+    problem: 'Fallas que interrumpen el trabajo diario.',
     description:
       'Nuestro Geek Squad brinda múltiples servicios generales especializados con profesionales certificados para servir calidad.',
+    result: 'Equipos y usuarios con atención técnica clara.',
     bullets: ['Helpdesk', 'Reparación de computadores', 'Electricidad residencial'],
   },
   {
     slug: 'redes',
     eyebrow: 'Redes',
     title: 'Implementación, conectividad y cableado estructurado',
+    problem: 'Conexiones inestables o infraestructura desordenada.',
     description:
       'Soporte en redes, control de accesos a sitios web, apoyo a departamentos de informática, configuraciones básicas Wi-Fi e instalación de cableado estructurado certificado.',
+    result: 'Una red organizada, documentada y preparada para crecer.',
     bullets: ['Puntos de red', 'Wi-Fi básico', 'Cableado certificado'],
   },
   {
     slug: 'seguridad',
     eyebrow: 'Video Vigilancia',
     title: 'Seguridad física con implementación certificada',
+    problem: 'Poca visibilidad y control de espacios críticos.',
     description:
       'Distribuidores autorizados de equipos de vigilancia HIKVISION con personal certificado en implementación de soluciones de seguridad física.',
+    result: 'Videovigilancia instalada para supervisar mejor la operación.',
     bullets: ['HIKVISION', 'Implementación certificada', 'Seguridad física'],
   },
   {
     slug: 'antivirus',
     eyebrow: 'AntiVirus',
     title: 'Protección para hogares y empresas',
+    problem: 'Equipos y datos expuestos a amenazas.',
     description:
       'Mantenga segura su información personal con soluciones antivirus. Somos socios de Kaspersky y brindamos protección adaptada a hogares y empresas.',
+    result: 'Protección adaptada al uso de hogares y empresas.',
     bullets: ['Kaspersky', 'Hogares', 'Empresas'],
   },
   {
     slug: 'cloud',
     eyebrow: 'Cloud',
     title: 'Servicios en la nube y administración centralizada',
+    problem: 'Información dispersa y respaldos inconsistentes.',
     description:
       'Optimice recursos mediante servicios cloud, implementación SaaS, respaldos automáticos, administración centralizada y monitoreo de infraestructura tecnológica.',
+    result: 'Servicios centralizados con respaldo y monitoreo.',
     bullets: ['SaaS', 'Respaldos automáticos', 'Monitoreo'],
   },
   {
     slug: 'educacion',
     eyebrow: 'Educación',
     title: 'Charlas, talleres y formación tecnológica',
+    problem: 'Brechas de conocimiento tecnológico aplicado.',
     description:
       'Galería de eventos y charlas de emprendimiento tecnológico en colegios y universidades, con actividades orientadas a desarrollo profesional y tecnología aplicada.',
+    result: 'Formación práctica para estudiantes y profesionales.',
     bullets: ['Podcast', 'Arduino', 'Robótica'],
   },
 ]

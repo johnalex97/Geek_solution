@@ -1,46 +1,40 @@
-import { services } from '../data/siteContent.js'
-import { fadeUp, MotionArticle, MotionSection } from '../components/motion.js'
-import { useTheme } from '../components/theme.jsx'
-import { SectionTag } from '../components/ui.jsx'
+import { ActionButton } from '../components/ActionButton.jsx'
+import PageMeta from '../components/PageMeta.jsx'
+import ServiceCatalog from '../components/ServiceCatalog.jsx'
+import { IconArrow, SectionIntro } from '../components/ui.jsx'
+import { pageMeta, services } from '../data/siteContent.js'
 
 function ServicesPage() {
-  const { isLight } = useTheme()
-
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
-      <MotionSection {...fadeUp}>
-        <SectionTag>Servicios</SectionTag>
-        <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
-          Un portafolio real para helpdesk, redes, seguridad, antivirus, cloud y educación.
-        </h1>
-        <p className={`mt-6 max-w-3xl text-base leading-8 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
-          Geek Solution integra servicios técnicos y de infraestructura para hogares, pymes e instituciones que necesitan soporte confiable, implementación ordenada y acompañamiento profesional.
-        </p>
-      </MotionSection>
+    <main id="main-content" tabIndex={-1}>
+      <PageMeta {...pageMeta['/servicios']} />
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((service, index) => (
-          <MotionArticle
-            key={service.title}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, delay: index * 0.05 }}
-            className={`rounded-[1.8rem] border p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1.5 ${isLight ? 'border-slate-200 bg-white/80 hover:border-cyan-300/40' : 'border-white/10 bg-white/[0.04] hover:border-cyan-300/30'}`}
-          >
-            <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>{service.eyebrow}</p>
-            <h2 className={`mt-5 font-display text-2xl font-semibold tracking-[-0.04em] ${isLight ? 'text-slate-950' : 'text-white'}`}>{service.title}</h2>
-            <p className={`mt-4 text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>{service.description}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {service.bullets.map((bullet) => (
-                <span key={bullet} className={`rounded-full border px-3 py-1.5 text-xs ${isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/10 bg-slate-950/70 text-slate-300'}`}>
-                  {bullet}
-                </span>
-              ))}
-            </div>
-          </MotionArticle>
-        ))}
-      </div>
+      <section className="mx-auto max-w-7xl px-5 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-20">
+        <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#007a3f]">Servicios</p>
+        <h1 className="mt-6 max-w-4xl text-balance font-display text-[2.6rem] font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl">
+          Soluciones para mantener tu tecnología en operación.
+        </h1>
+        <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-[var(--technical-gray)] sm:text-lg">
+          Identifica lo que necesitas resolver y revisa el resultado que cada servicio puede aportar a tu hogar o empresa.
+        </p>
+
+        <div className="mt-12">
+          <ServiceCatalog services={services} />
+        </div>
+      </section>
+
+      <section className="border-t border-black/15 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-8 px-5 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <SectionIntro
+            eyebrow="Siguiente paso"
+            title="Conversemos sobre tu operación."
+            description="Cuéntanos qué está ocurriendo y te ayudamos a definir el servicio adecuado."
+          />
+          <ActionButton to="/contacto" className="w-full shrink-0 sm:w-auto">
+            Solicitar asesoría <IconArrow />
+          </ActionButton>
+        </div>
+      </section>
     </main>
   )
 }
