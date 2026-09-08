@@ -1,36 +1,39 @@
 import { Link } from 'react-router-dom'
-import { fadeUp, MotionSection } from '../components/motion.js'
-import { useTheme } from '../components/theme.jsx'
-import { IconArrow, SectionTag } from '../components/ui.jsx'
+import { ActionButton } from '../components/ActionButton.jsx'
+import PageMeta from '../components/PageMeta.jsx'
+import { IconArrow } from '../components/ui.jsx'
+import { pageMeta } from '../data/siteContent.js'
 
 function PortalPage() {
-  const { isLight } = useTheme()
-
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6 sm:pt-36 lg:px-8">
-      <MotionSection {...fadeUp} className={`rounded-[2rem] border p-8 backdrop-blur-sm ${isLight ? 'border-cyan-100 bg-[linear-gradient(180deg,rgba(186,230,253,0.55),rgba(255,255,255,0.9))]' : 'border-white/10 bg-[linear-gradient(180deg,rgba(34,211,238,0.08),rgba(255,255,255,0.03))]'}`}>
-        <SectionTag>Portal de Ayuda</SectionTag>
-        <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
-          Soporte técnico orientado a continuidad, disponibilidad y calidad del servicio.
-        </h1>
-        <p className={`mt-6 max-w-3xl text-base leading-8 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>
-          Acceda directamente a nuestro portal de tickets en Freshdesk para crear solicitudes, dar seguimiento a incidencias y mantener comunicación con el equipo de soporte.
-        </p>
-        <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="https://portaldeayudatecnicageeksolution.freshdesk.com/"
-            target="_blank"
-            rel="noreferrer"
-            className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 ${isLight ? 'bg-cyan-500 text-white hover:bg-cyan-600' : 'bg-cyan-400 text-slate-950 hover:bg-cyan-300'}`}
-          >
-            Acceso a portal de asistencia
-            <IconArrow />
-          </a>
-          <Link to="/servicios" className={`inline-flex items-center justify-center gap-2 rounded-full border px-6 py-4 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${isLight ? 'border-slate-300 bg-white text-slate-900 hover:border-cyan-400 hover:bg-cyan-50' : 'border-white/12 bg-white/6 text-white hover:border-cyan-300/30 hover:bg-white/10'}`}>
-            Revisar servicios
-          </Link>
+      <PageMeta {...pageMeta['/portal-ayuda']} />
+      <section className="overflow-hidden rounded-3xl bg-[var(--ink)] text-white">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-6 py-5 sm:px-10 lg:px-14">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--signal-green)]">Portal de soporte</p>
+          <p className="font-mono text-xs text-white/65">Geek Solution / Freshdesk</p>
         </div>
-      </MotionSection>
+        <div className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+          <h1 className="max-w-3xl text-balance font-display text-[2.6rem] font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl">
+            Tu punto de contacto con soporte técnico.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
+            Soporte orientado a continuidad, disponibilidad y calidad del servicio. En Freshdesk puedes crear solicitudes, seguir incidencias y comunicarte con nuestro equipo de soporte.
+          </p>
+          <div className="mt-10">
+            <ActionButton href="https://portaldeayudatecnicageeksolution.freshdesk.com/" target="_blank" rel="noopener noreferrer" className="w-full focus-visible:outline-[var(--signal-green)] sm:w-auto" aria-describedby="portal-window-note">
+              Abrir portal de soporte <IconArrow />
+            </ActionButton>
+            <p id="portal-window-note" className="mt-3 text-xs leading-6 text-white/65">Se abre en una nueva pestaña en Freshdesk.</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
+        <p className="text-sm text-[var(--technical-gray)]">¿Necesitas orientación antes de crear una solicitud?</p>
+        <Link to="/servicios" className="inline-flex min-h-12 items-center text-sm font-semibold underline decoration-black/25 underline-offset-4 hover:text-[#007a3f]">Revisar servicios</Link>
+        <Link to="/contacto" className="inline-flex min-h-12 items-center text-sm font-semibold underline decoration-black/25 underline-offset-4 hover:text-[#007a3f]">Contactar al equipo</Link>
+      </div>
     </main>
   )
 }
