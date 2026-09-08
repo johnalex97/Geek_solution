@@ -1,8 +1,9 @@
-version: '3.8'
-
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_CONTACT_FORM_ENDPOINT: ${VITE_CONTACT_FORM_ENDPOINT}
     ports:
       - "80:80"
     restart: unless-stopped

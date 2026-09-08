@@ -17,7 +17,18 @@ Ejemplo recomendado:
 VITE_CONTACT_FORM_ENDPOINT=https://formspree.io/f/tu-endpoint
 ```
 
-Con esta integracion, el frontend no guarda credenciales y puede conectarse a un servicio profesional como Formspree o a un endpoint propio.
+Las variables `VITE_*` son configuración pública de compilación: sus valores se incluyen en el JavaScript que recibe el navegador. No son secretos; nunca coloques contraseñas, tokens privados ni claves de API en ellas. El endpoint debe aceptar solicitudes JSON desde el origen público del sitio (CORS).
+
+El formulario incluye nombre, correo, teléfono opcional, tipo de atención (`empresa` o `hogar`) y mensaje. Si el endpoint no está definido o el envío falla, ofrece continuar por WhatsApp y conserva la consulta para volver a intentarlo.
+
+Docker Compose lee `.env` para interpolar `VITE_CONTACT_FORM_ENDPOINT` en `build.args`. El archivo `.env` permanece intencionalmente excluido del contexto de construcción mediante `.dockerignore`; el Dockerfile recibe únicamente el argumento público y lo expone a Vite antes de compilar. Cambiar una variable en el contenedor Nginx ya iniciado no cambia el sitio: reconstruye la imagen al actualizar el endpoint.
+
+```bash
+docker compose config
+docker compose up -d --build
+```
+
+En Easypanel, configura `VITE_CONTACT_FORM_ENDPOINT` como argumento de construcción o variable utilizada por Compose, y vuelve a desplegar con reconstrucción.
 
 ## Despliegue con Docker y Easypanel
 
@@ -30,6 +41,6 @@ Para desplegar en un VPS usando Easypanel:
 
 ### Construir imagen localmente (opcional)
 ```bash
-docker build -t site-geek .
+docker build --build-arg VITE_CONTACT_FORM_ENDPOINT=https://formspree.io/f/tu-endpoint -t site-geek .
 docker run -p 80:80 site-geek
 ```

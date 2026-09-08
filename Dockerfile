@@ -13,6 +13,8 @@ RUN npm ci
 COPY . .
 
 # Build the app
+ARG VITE_CONTACT_FORM_ENDPOINT
+ENV VITE_CONTACT_FORM_ENDPOINT=$VITE_CONTACT_FORM_ENDPOINT
 RUN npm run build
 
 # Production stage
