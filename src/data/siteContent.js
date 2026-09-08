@@ -46,6 +46,7 @@ export const stats = [
 
 export const services = [
   {
+    slug: 'soporte',
     eyebrow: 'Helpdesk',
     title: 'Soporte técnico general especializado',
     description:
@@ -53,6 +54,7 @@ export const services = [
     bullets: ['Helpdesk', 'Reparación de computadores', 'Electricidad residencial'],
   },
   {
+    slug: 'redes',
     eyebrow: 'Redes',
     title: 'Implementación, conectividad y cableado estructurado',
     description:
@@ -60,6 +62,7 @@ export const services = [
     bullets: ['Puntos de red', 'Wi-Fi básico', 'Cableado certificado'],
   },
   {
+    slug: 'seguridad',
     eyebrow: 'Video Vigilancia',
     title: 'Seguridad física con implementación certificada',
     description:
@@ -67,6 +70,7 @@ export const services = [
     bullets: ['HIKVISION', 'Implementación certificada', 'Seguridad física'],
   },
   {
+    slug: 'antivirus',
     eyebrow: 'AntiVirus',
     title: 'Protección para hogares y empresas',
     description:
@@ -74,6 +78,7 @@ export const services = [
     bullets: ['Kaspersky', 'Hogares', 'Empresas'],
   },
   {
+    slug: 'cloud',
     eyebrow: 'Cloud',
     title: 'Servicios en la nube y administración centralizada',
     description:
@@ -81,6 +86,7 @@ export const services = [
     bullets: ['SaaS', 'Respaldos automáticos', 'Monitoreo'],
   },
   {
+    slug: 'educacion',
     eyebrow: 'Educación',
     title: 'Charlas, talleres y formación tecnológica',
     description:
@@ -145,3 +151,31 @@ export const companyProfile = {
   supportSummary:
     'Departamento Técnico, Oficina Virtual y SAC mediante +504 2213-0624 y +504 3383-7341.',
 }
+
+export const operationsSystems = [
+  { name: 'Soporte', status: 'Activo', detail: 'Atención técnica y helpdesk' },
+  { name: 'Redes', status: 'Activo', detail: 'Conectividad e infraestructura' },
+  { name: 'Seguridad', status: 'Activo', detail: 'Videovigilancia y protección' },
+  { name: 'Cloud', status: 'Activo', detail: 'Respaldo y administración' },
+]
+
+export const audienceContent = [
+  {
+    name: 'Empresa',
+    title: 'Tu equipo necesita seguir trabajando.',
+    description: 'Apoyo a tu departamento de informática, redes y administración cloud para la operación de tu empresa.',
+    services: 'Helpdesk · Cableado estructurado · Cloud',
+  },
+  {
+    name: 'Hogar',
+    title: 'Tu tecnología también es parte de casa.',
+    description: 'Soporte para tu computadora, configuración Wi-Fi y protección de tu información personal.',
+    services: 'Reparación de equipos · Wi-Fi · Antivirus',
+  },
+]
+
+export const processSteps = [
+  { title: 'Cuéntanos qué ocurre', description: 'Recibimos tu consulta por formulario, WhatsApp, teléfono o correo.' },
+  { title: 'Evaluamos la solución', description: 'Definimos alcance, prioridad y el canal de atención adecuado.' },
+  { title: 'Ponemos la solución en marcha', description: 'Ejecutamos el servicio y mantenemos comunicación durante el proceso.' },
+]

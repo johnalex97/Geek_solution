@@ -1,130 +1,83 @@
-import { Link } from 'react-router-dom'
-import { companyProfile, pillars, services, stats } from '../data/siteContent.js'
-import { fadeUp, MotionArticle, MotionDiv, MotionSection } from '../components/motion.js'
-import { useTheme } from '../components/theme.jsx'
-import { IconArrow, SectionTag } from '../components/ui.jsx'
+import { ActionButton } from '../components/ActionButton.jsx'
+import OperationsPanel from '../components/OperationsPanel.jsx'
+import PageMeta from '../components/PageMeta.jsx'
+import ServiceResolver from '../components/ServiceResolver.jsx'
+import { MotionDiv, useRevealMotion } from '../components/motion.js'
+import { IconArrow, SectionIntro } from '../components/ui.jsx'
+import { audienceContent, companyProfile, contactCards, operationsSystems, pageMeta, processSteps, services } from '../data/siteContent.js'
 
 function HomePage() {
-  const { isLight } = useTheme()
+  const reveal = useRevealMotion()
+  const whatsapp = contactCards.find((contact) => contact.label === 'WhatsApp')
 
   return (
     <main id="main-content" tabIndex={-1}>
-      <section className="relative pt-32 sm:pt-36">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 sm:px-6 lg:gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-28">
-          <MotionDiv {...fadeUp} className="relative">
-            <SectionTag>Geek Solution</SectionTag>
-            <h1 className={`mt-6 max-w-4xl font-display text-4xl font-semibold leading-none tracking-[-0.06em] sm:text-5xl lg:text-6xl xl:text-7xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
-              Soluciones tecnologicas de alto nivel para soporte, redes, seguridad y nube.
+      <PageMeta {...pageMeta['/']} />
+      <section className="border-b border-black/10 pt-32 sm:pt-36">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-8 lg:pb-24">
+          <MotionDiv {...reveal}>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#007a3f]">Tecnología con respaldo local</p>
+            <h1 className="mt-6 max-w-2xl text-balance font-display text-[2.6rem] font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl xl:text-[4.5rem]">
+              Tecnología que mantiene tu operación <span className="text-[#007a3f]">funcionando.</span>
             </h1>
-            <p className={`mt-7 max-w-2xl text-base leading-8 sm:text-lg ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
-              {companyProfile.summary}
-            </p>
-
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <Link to="/servicios" className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition duration-300 hover:-translate-y-0.5 ${isLight ? 'bg-cyan-500 text-white hover:bg-cyan-600' : 'bg-cyan-400 text-slate-950 hover:bg-cyan-300'}`}>
-                Explorar servicios
-                <IconArrow />
-              </Link>
-              <Link to="/contacto" className={`inline-flex items-center justify-center gap-2 rounded-full border px-6 py-4 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${isLight ? 'border-slate-200 bg-white text-slate-900 hover:border-cyan-300/40 hover:bg-cyan-50' : 'border-white/12 bg-white/6 text-white hover:border-cyan-300/30 hover:bg-white/10'}`}>
-                Hablar con un asesor
-              </Link>
+            <p className="mt-6 max-w-lg text-pretty text-base leading-8 text-[var(--technical-gray)] sm:text-lg">Soporte, redes, seguridad y nube para hogares y empresas en Honduras.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ActionButton to="/contacto">Solicitar asesoría <IconArrow /></ActionButton>
+              <ActionButton href={whatsapp.href} variant="secondary">Hablar por WhatsApp</ActionButton>
             </div>
-
-            <div className="mt-12 grid gap-4 sm:grid-cols-3">
-              {stats.map((stat) => (
-                <MotionArticle key={stat.label} {...fadeUp} className={`rounded-3xl border p-5 backdrop-blur-sm ${isLight ? 'border-slate-200 bg-white/80' : 'border-white/10 bg-white/[0.04]'}`}>
-                  <div className={`font-display text-3xl font-semibold tracking-[-0.06em] ${isLight ? 'text-slate-950' : 'text-white'}`}>{stat.value}</div>
-                  <p className={`mt-2 text-sm ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>{stat.label}</p>
-                </MotionArticle>
-              ))}
-            </div>
+            <p className="mt-8 font-mono text-xs leading-6 text-[var(--technical-gray)]">{companyProfile.location} <span aria-hidden="true">/</span> PYME hondureña</p>
           </MotionDiv>
-
-          <MotionDiv {...fadeUp} className="relative">
-            <div className={`absolute inset-0 rounded-[2rem] blur-3xl ${isLight ? 'bg-cyan-300/20' : 'bg-cyan-400/10'}`} />
-            <div className={`relative overflow-hidden rounded-[2rem] border p-6 shadow-[0_30px_80px_rgba(0,0,0,0.12)] backdrop-blur-xl ${isLight ? 'border-slate-200 bg-white/82' : 'border-white/10 bg-white/[0.04] shadow-[0_30px_80px_rgba(0,0,0,0.35)]'}`}>
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
-              <div className="grid gap-5">
-                <div className="rounded-[1.75rem] border border-cyan-300/14 bg-[linear-gradient(135deg,rgba(8,145,178,0.18),rgba(37,99,235,0.08))] p-6">
-                  <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>Operacion segura</p>
-                  <h2 className={`mt-4 font-display text-3xl font-semibold tracking-[-0.05em] ${isLight ? 'text-slate-950' : 'text-white'}`}>
-                    Especialistas en instalaciones de red y sistemas de seguridad.
-                  </h2>
-                  <p className={`mt-4 text-sm leading-7 ${isLight ? 'text-slate-700' : 'text-slate-300'}`}>
-                    Ejecutamos servicios en tiempos establecidos bajo normativas SLA, con enfoque en calidad, optimizacion de costos y valor agregado.
-                  </p>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className={`rounded-[1.5rem] border p-5 ${isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-slate-950/80'}`}>
-                    <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Especialidad</p>
-                    <p className={`mt-3 font-display text-xl ${isLight ? 'text-slate-950' : 'text-white'}`}>Helpdesk, redes, seguridad y cloud</p>
-                  </div>
-                  <div className={`rounded-[1.5rem] border p-5 ${isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-slate-950/80'}`}>
-                    <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Base operativa</p>
-                    <p className={`mt-3 font-display text-xl ${isLight ? 'text-slate-950' : 'text-white'}`}>{companyProfile.location}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </MotionDiv>
+          <OperationsPanel systems={operationsSystems} />
         </div>
       </section>
 
-      <MotionSection {...fadeUp} className="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <SectionTag>Servicios destacados</SectionTag>
-          <h2 className={`mt-6 font-display text-4xl font-semibold tracking-[-0.05em] sm:text-5xl ${isLight ? 'text-slate-950' : 'text-white'}`}>
-            Servicios reales para continuidad operativa, conectividad y proteccion.
-          </h2>
-        </div>
+      <ServiceResolver services={services} />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {services.slice(0, 3).map((service, index) => (
-            <MotionArticle
-              key={service.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.6, delay: index * 0.06 }}
-              className={`group relative overflow-hidden rounded-[1.8rem] border p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1.5 ${isLight ? 'border-slate-200 bg-white/80 hover:border-cyan-300/40 hover:bg-white' : 'border-white/10 bg-white/[0.04] hover:border-cyan-300/30 hover:bg-white/[0.06]'}`}
-            >
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent opacity-0 transition group-hover:opacity-100" />
-              <p className={`text-xs uppercase tracking-[0.28em] ${isLight ? 'text-cyan-600' : 'text-cyan-200'}`}>{service.eyebrow}</p>
-              <h3 className={`mt-5 font-display text-2xl font-semibold tracking-[-0.04em] ${isLight ? 'text-slate-950' : 'text-white'}`}>{service.title}</h3>
-              <p className={`mt-4 text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>{service.description}</p>
-            </MotionArticle>
+      <section aria-label="Soluciones para empresas y hogares" className="mx-auto max-w-7xl px-5 pb-16 sm:px-6 lg:px-8 lg:pb-24">
+        <div className="grid overflow-hidden rounded-2xl border border-black/15 bg-white md:grid-cols-2">
+          {audienceContent.map((audience) => (
+            <article key={audience.name} className="p-6 first:border-b first:border-black/15 sm:p-10 md:first:border-r md:first:border-b-0">
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#007a3f]">{audience.name}</p>
+              <h2 className="mt-5 max-w-md text-balance font-display text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-4xl">{audience.title}</h2>
+              <p className="mt-5 max-w-lg text-sm leading-7 text-[var(--technical-gray)]">{audience.description}</p>
+              <p className="mt-7 border-t border-black/10 pt-5 font-mono text-xs leading-6 text-[#007a3f]">{audience.services}</p>
+            </article>
           ))}
         </div>
+      </section>
 
-        <div className="mt-8">
-          <Link to="/servicios" className={`inline-flex items-center gap-2 rounded-full border px-6 py-4 text-sm font-medium transition duration-300 hover:-translate-y-0.5 ${isLight ? 'border-slate-300 bg-white text-slate-900 hover:border-cyan-400 hover:bg-cyan-50' : 'border-white/12 bg-white/6 text-white hover:border-cyan-300/30 hover:bg-white/10'}`}>
-            Ver todos los servicios
-            <IconArrow />
-          </Link>
+      <section className="border-y border-black/10 bg-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:px-8 lg:py-20">
+          <div>
+            <SectionIntro eyebrow="Experiencia y compromiso" title="Más de 12 años resolviendo necesidades tecnológicas." />
+            <p className="mt-6 max-w-xl leading-8 text-[var(--technical-gray)]">{companyProfile.summary}</p>
+            <ActionButton to="/nosotros" variant="secondary" className="mt-7">Conoce Geek Solution <IconArrow /></ActionButton>
+          </div>
+          <div className="flex flex-col justify-center border-l-2 border-[#007a3f] pl-6 sm:pl-9">
+            <p className="font-mono text-sm font-semibold text-[#007a3f]">SLA / Acuerdos de nivel de servicio</p>
+            <h3 className="mt-5 font-display text-3xl font-medium tracking-tight">Tiempos definidos. Un alcance claro.</h3>
+            <p className="mt-4 leading-8 text-[var(--technical-gray)]">Ejecutamos servicios en tiempos establecidos bajo normativas SLA, optimizando costos y agregando valor a cada entrega.</p>
+          </div>
         </div>
-      </MotionSection>
+      </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <MotionDiv {...fadeUp} className={`rounded-[2rem] border p-7 backdrop-blur-sm ${isLight ? 'border-slate-200 bg-white/80' : 'border-white/10 bg-white/[0.04]'}`}>
-            <SectionTag>Nosotros</SectionTag>
-            <h2 className={`mt-6 font-display text-4xl font-semibold tracking-[-0.05em] ${isLight ? 'text-slate-950' : 'text-white'}`}>
-              Mas de 12 años respaldando operaciones tecnologicas en Honduras.
-            </h2>
-            <p className={`mt-5 text-base leading-8 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
-              Geek Solution es una PYME hondurena enfocada en soporte tecnico, instalaciones de red, sistemas de seguridad, soluciones cloud y formacion tecnologica.
-            </p>
-          </MotionDiv>
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <SectionIntro eyebrow="Cómo trabajamos" title="De la consulta a la solución." />
+        <ol className="mt-10 grid gap-8 md:grid-cols-3">
+          {processSteps.map((step, index) => (
+            <li key={step.title} className="border-t border-black/15 pt-5">
+              <span aria-hidden="true" className="font-mono text-sm text-[#007a3f]">0{index + 1}</span>
+              <h3 className="mt-5 font-display text-xl font-medium tracking-tight">{step.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[var(--technical-gray)]">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-          <MotionDiv {...fadeUp} className="space-y-4">
-            {pillars.map((item) => (
-              <div key={item} className={`flex gap-4 rounded-2xl border p-4 ${isLight ? 'border-slate-200 bg-white/80' : 'border-white/8 bg-slate-950/70'}`}>
-                <div className="mt-1 size-2.5 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.9)]" />
-                <p className={`text-sm leading-7 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>{item}</p>
-              </div>
-            ))}
-          </MotionDiv>
+      <section className="border-t border-black/15 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-8 px-5 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <SectionIntro eyebrow="Hablemos de tu tecnología" title="Cuéntanos qué necesitas resolver." description="Solicita una evaluación técnica para tu hogar o empresa." />
+          <ActionButton to="/contacto" className="w-full shrink-0 sm:w-auto">Solicitar asesoría <IconArrow /></ActionButton>
         </div>
       </section>
     </main>
