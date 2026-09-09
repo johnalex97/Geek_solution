@@ -9,5 +9,5 @@ it('identifies the copyright owner and site creator', () => {
   render(<MemoryRouter><SiteFooter /></MemoryRouter>)
 
   expect(screen.getByText('Geek Solution © 2026 | TODOS LOS DERECHOS RESERVADOS.')).toBeInTheDocument()
-  expect(screen.getByText('Hecho por Jonatan Maradiaga')).toBeInTheDocument()
+  expect(screen.getByText('Made by Jonatan Maradiaga')).toBeInTheDocument()
 })
