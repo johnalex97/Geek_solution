@@ -42,7 +42,13 @@ export default function SiteFooter() {
         </section>
       </div>
       <div className="border-t border-white/10 px-5 py-6 sm:px-6 lg:px-8">
-        <p className="mx-auto max-w-7xl text-xs leading-6 text-white/60">{companyProfile.supportSummary}</p>
+        <div className="mx-auto max-w-7xl text-xs leading-6 text-white/60">
+          <p>{companyProfile.supportSummary}</p>
+          <div className="mt-5 flex flex-col items-center gap-2 border-t border-white/10 pt-5 text-center sm:flex-row sm:justify-between sm:text-left">
+            <p>Geek Solution © 2026 | TODOS LOS DERECHOS RESERVADOS.</p>
+            <p>Hecho por Jonatan Maradiaga</p>
+          </div>
+        </div>
       </div>
     </footer>
   )
