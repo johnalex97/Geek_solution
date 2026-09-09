@@ -4,17 +4,28 @@ import { afterEach, expect, it, vi } from 'vitest'
 import ContactForm from './ContactForm.jsx'
 import { contactCards } from '../data/siteContent.js'
 
+vi.mock('@hcaptcha/react-hcaptcha', () => ({
+  default: ({ onVerify, onExpire, onError }) => (
+    <div>
+      <button type="button" onClick={() => onVerify('verified-captcha-token')}>Completar verificación</button>
+      <button type="button" onClick={() => onExpire?.()}>Expirar verificación</button>
+      <button type="button" onClick={() => onError?.()}>Fallar verificación</button>
+    </div>
+  ),
+}))
+
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()
 })
 
-async function fillValidForm(user) {
+async function fillValidForm(user, { verifyCaptcha = true } = {}) {
   await user.type(screen.getByRole('textbox', { name: /^nombre/i }), ' Ana Pérez ')
   await user.type(screen.getByRole('textbox', { name: /^correo/i }), 'ana@example.com')
   await user.type(screen.getByRole('textbox', { name: /teléfono/i }), ' +504 9999-0000 ')
   await user.click(screen.getByRole('radio', { name: /hogar/i }))
   await user.type(screen.getByRole('textbox', { name: /^mensaje/i }), ' Necesito soporte de red. ')
+  if (verifyCaptcha) await user.click(screen.getByRole('button', { name: /completar verificación/i }))
 }
 
 it('associates inline errors and focuses the first invalid field in form order', async () => {
@@ -84,6 +95,36 @@ it('offers an accessible next step when the Web3Forms access key is missing', as
   expect(screen.getByRole('textbox', { name: /^nombre/i })).toHaveValue(' Ana Pérez ')
 })
 
+it('requires hCaptcha verification before contacting Web3Forms', async () => {
+  const user = userEvent.setup()
+  const fetchRequest = vi.fn()
+  vi.stubGlobal('fetch', fetchRequest)
+  render(<ContactForm accessKey="public-access-key" />)
+  await fillValidForm(user, { verifyCaptcha: false })
+  await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
+  expect(screen.getByRole('status')).toHaveTextContent(/completa la verificación de seguridad/i)
+  expect(fetchRequest).not.toHaveBeenCalled()
+})
+
+it('requires a new hCaptcha token after the verification expires', async () => {
+  const user = userEvent.setup()
+  const fetchRequest = vi.fn()
+  vi.stubGlobal('fetch', fetchRequest)
+  render(<ContactForm accessKey="public-access-key" />)
+  await fillValidForm(user)
+  await user.click(screen.getByRole('button', { name: /expirar verificación/i }))
+  await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
+  expect(screen.getByRole('status')).toHaveTextContent(/completa la verificación de seguridad/i)
+  expect(fetchRequest).not.toHaveBeenCalled()
+})
+
+it('announces when hCaptcha cannot load', async () => {
+  const user = userEvent.setup()
+  render(<ContactForm accessKey="public-access-key" />)
+  await user.click(screen.getByRole('button', { name: /fallar verificación/i }))
+  expect(screen.getByRole('status')).toHaveTextContent(/no se pudo cargar la verificación de seguridad/i)
+})
+
 it('sends the selected audience in the normalized payload, announces loading and clears on success', async () => {
   const user = userEvent.setup()
   let resolveRequest
@@ -100,6 +141,7 @@ it('sends the selected audience in the normalized payload, announces loading and
   expect(request.method).toBe('POST')
   expect(JSON.parse(request.body)).toEqual({
     access_key: 'public-access-key', subject: 'Nueva consulta desde Geek Solution', from_name: 'Geek Solution',
+    'h-captcha-response': 'verified-captcha-token',
     name: 'Ana Pérez', email: 'ana@example.com', phone: '+504 9999-0000',
     audience: 'hogar', message: 'Necesito soporte de red.', source: 'Sitio web Geek Solution',
   })
@@ -145,6 +187,7 @@ it.each(['http', 'api', 'network'])('keeps the inquiry available to retry after 
   expect(screen.getByRole('textbox', { name: /^nombre/i })).toHaveValue(' Ana Pérez ')
   expect(screen.getByRole('radio', { name: /hogar/i })).toBeChecked()
   fetchRequest.mockResolvedValue(Response.json({ success: true, message: 'Email sent successfully!' }))
+  await user.click(screen.getByRole('button', { name: /completar verificación/i }))
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(/enviada correctamente/i))
 })

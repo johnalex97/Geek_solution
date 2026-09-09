@@ -1,4 +1,5 @@
 import { useContext, useId, useLayoutEffect, useRef, useState } from 'react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { contactCards } from '../data/siteContent.js'
 import { createContactPayload, validateContactForm } from '../utils/contactForm.js'
 import { ActionButton } from './ActionButton.jsx'
@@ -7,6 +8,7 @@ import { ContactDraftContext, initialContactForm } from './contactDraft.js'
 
 const inputClass = 'contact-input w-full rounded-xl border bg-white px-4 py-3 text-[var(--ink)] placeholder:text-[var(--technical-gray)]'
 const web3FormsEndpoint = 'https://api.web3forms.com/submit'
+const web3FormsHCaptchaSiteKey = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
 
 export default function ContactForm({ accessKey }) {
   const localDraft = useState(initialContactForm)
@@ -14,9 +16,11 @@ export default function ContactForm({ accessKey }) {
   const [form, setForm] = retainedDraft ?? localDraft
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState({ type: 'idle', message: '' })
+  const [captchaToken, setCaptchaToken] = useState('')
   const [focusRequest, setFocusRequest] = useState(null)
   const invalidAttempts = useRef(0)
   const fields = useRef({})
+  const captcha = useRef(null)
   const id = useId()
   const whatsapp = contactCards.find((channel) => channel.label === 'WhatsApp')
 
@@ -59,12 +63,16 @@ export default function ContactForm({ accessKey }) {
       setStatus({ type: 'error', message: 'El formulario no está disponible en este momento. Escríbenos por WhatsApp o utiliza los canales de contacto.' })
       return
     }
+    if (!captchaToken) {
+      setStatus({ type: 'validation', message: 'Completa la verificación de seguridad antes de enviar.' })
+      return
+    }
     setStatus({ type: 'loading', message: 'Enviando…' })
     try {
       const response = await fetch(web3FormsEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(createContactPayload(form, accessKey)),
+        body: JSON.stringify(createContactPayload(form, accessKey, captchaToken)),
       })
       const result = await response.json()
       if (!response.ok || !result.success) throw new Error('request_failed')
@@ -73,6 +81,9 @@ export default function ContactForm({ accessKey }) {
       setErrors({})
     } catch {
       setStatus({ type: 'error', message: 'No se pudo enviar la consulta en este momento. Intenta de nuevo o escríbenos por WhatsApp.' })
+    } finally {
+      setCaptchaToken('')
+      captcha.current?.resetCaptcha()
     }
   }
 
@@ -99,6 +110,22 @@ export default function ContactForm({ accessKey }) {
         <label htmlFor={`${id}-message`} className="font-semibold">Mensaje *</label>
         <textarea id={`${id}-message`} ref={(node) => { fields.current.message = node }} rows={6} name="message" value={form.message} onChange={handleChange} aria-required="true" aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? `${id}-message-error` : undefined} className={inputClass} />
         {errors.message ? <p id={`${id}-message-error`} className="text-sm text-red-700">{errors.message}</p> : null}
+      </div>
+      <div className="grid gap-3 text-sm">
+        <p className="font-semibold">Verificación de seguridad *</p>
+        <HCaptcha
+          ref={captcha}
+          sitekey={web3FormsHCaptchaSiteKey}
+          size="compact"
+          languageOverride="es"
+          reCaptchaCompat={false}
+          onVerify={setCaptchaToken}
+          onExpire={() => setCaptchaToken('')}
+          onError={() => {
+            setCaptchaToken('')
+            setStatus({ type: 'error', message: 'No se pudo cargar la verificación de seguridad. Recarga la página o escríbenos por WhatsApp.' })
+          }}
+        />
       </div>
       <label className="sr-only" aria-hidden="true">
         No completar este campo

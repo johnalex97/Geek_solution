@@ -48,6 +48,12 @@ Las variables `VITE_*` son configuración pública de compilación: sus valores 
 
 El formulario incluye nombre, correo, teléfono opcional, tipo de atención (`empresa` o `hogar`) y mensaje. Si la Access Key no está definida o el envío falla, ofrece continuar por WhatsApp y conserva la consulta para volver a intentarlo.
 
+### Protección con hCaptcha
+
+El formulario usa la integración gratuita de hCaptcha proporcionada por Web3Forms. Además del código del sitio, debes abrir el formulario correspondiente en el panel de Web3Forms y activar **hCaptcha** como proveedor de captcha. Sin esa activación, Web3Forms no exigirá el token en el servidor.
+
+No necesitas agregar otra variable en Easypanel para el plan gratuito. Después de activar hCaptcha en Web3Forms, fuerza una reconstrucción del servicio en Easypanel y prueba el formulario desde el dominio publicado.
+
 Docker Compose lee `.env` para interpolar `VITE_WEB3FORMS_ACCESS_KEY` en `build.args`. El archivo `.env` permanece intencionalmente excluido del contexto de construcción mediante `.dockerignore`; el Dockerfile recibe únicamente la clave pública y la expone a Vite antes de compilar. Cambiar una variable en el contenedor Nginx ya iniciado no cambia el sitio: reconstruye la imagen al actualizar la clave.
 
 ```bash

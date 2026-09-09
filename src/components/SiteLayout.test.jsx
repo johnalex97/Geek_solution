@@ -5,6 +5,10 @@ import { MemoryRouter, useNavigate } from 'react-router-dom'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import App from '../App.jsx'
 
+vi.mock('@hcaptcha/react-hcaptcha', () => ({
+  default: ({ onVerify }) => <button type="button" onClick={() => onVerify('verified-captcha-token')}>Completar verificación</button>,
+}))
+
 let navigate
 function NavigationDriver() {
   const routerNavigate = useNavigate()
@@ -126,6 +130,7 @@ it('recovers an inquiry across site navigation and clears the retained draft aft
   expect(screen.getByRole('textbox', { name: /teléfono/i })).toHaveValue('+504 9999-0000')
   expect(screen.getByRole('radio', { name: /hogar/i })).toBeChecked()
   expect(screen.getByRole('textbox', { name: /^mensaje/i })).toHaveValue('Necesito soporte de red.')
+  await user.click(screen.getByRole('button', { name: /completar verificación/i }))
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   expect(screen.getByRole('status')).toHaveTextContent(/enviada correctamente/i)
   await act(() => navigate('/terminos'))

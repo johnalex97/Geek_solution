@@ -11,9 +11,10 @@ export function validateContactForm(formData) {
   return errors
 }
 
-export function createContactPayload(formData, accessKey) {
+export function createContactPayload(formData, accessKey, captchaToken) {
   return {
     access_key: accessKey.trim(),
+    'h-captcha-response': captchaToken,
     subject: 'Nueva consulta desde Geek Solution',
     from_name: 'Geek Solution',
     name: formData.name.trim(),
