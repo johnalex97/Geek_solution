@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        VITE_CONTACT_FORM_ENDPOINT: ${VITE_CONTACT_FORM_ENDPOINT}
+        VITE_WEB3FORMS_ACCESS_KEY: ${VITE_WEB3FORMS_ACCESS_KEY}
     ports:
       - "80:80"
     restart: unless-stopped

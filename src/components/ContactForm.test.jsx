@@ -19,7 +19,7 @@ async function fillValidForm(user) {
 
 it('associates inline errors and focuses the first invalid field in form order', async () => {
   const user = userEvent.setup()
-  render(<ContactForm endpoint="https://example.test/contact" />)
+  render(<ContactForm accessKey="public-access-key" />)
   const submit = screen.getByRole('button', { name: /enviar consulta/i })
   await user.click(submit)
   const name = screen.getByRole('textbox', { name: /^nombre/i })
@@ -49,7 +49,7 @@ it('associates inline errors and focuses the first invalid field in form order',
 
 it('commits error descriptions before focus and announces every invalid submission', async () => {
   const user = userEvent.setup()
-  render(<ContactForm endpoint="" />)
+  render(<ContactForm accessKey="" />)
   const name = screen.getByRole('textbox', { name: /^nombre/i })
   const focusSnapshots = []
   name.addEventListener('focus', () => {
@@ -72,9 +72,9 @@ it('commits error descriptions before focus and announces every invalid submissi
   }
 })
 
-it('offers an accessible next step when the endpoint is missing', async () => {
+it('offers an accessible next step when the Web3Forms access key is missing', async () => {
   const user = userEvent.setup()
-  render(<ContactForm endpoint="" />)
+  render(<ContactForm accessKey="" />)
   await fillValidForm(user)
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite')
@@ -89,20 +89,21 @@ it('sends the selected audience in the normalized payload, announces loading and
   let resolveRequest
   const fetchRequest = vi.fn(() => new Promise((resolve) => { resolveRequest = resolve }))
   vi.stubGlobal('fetch', fetchRequest)
-  render(<ContactForm endpoint="https://example.test/contact" />)
+  render(<ContactForm accessKey="public-access-key" />)
   await fillValidForm(user)
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   expect(screen.getByRole('button', { name: 'Enviando…' })).toBeDisabled()
   expect(screen.getByRole('status')).toHaveTextContent('Enviando…')
   expect(fetchRequest).toHaveBeenCalledTimes(1)
   const [endpoint, request] = fetchRequest.mock.calls[0]
-  expect(endpoint).toBe('https://example.test/contact')
+  expect(endpoint).toBe('https://api.web3forms.com/submit')
   expect(request.method).toBe('POST')
   expect(JSON.parse(request.body)).toEqual({
+    access_key: 'public-access-key', subject: 'Nueva consulta desde Geek Solution', from_name: 'Geek Solution',
     name: 'Ana Pérez', email: 'ana@example.com', phone: '+504 9999-0000',
     audience: 'hogar', message: 'Necesito soporte de red.', source: 'Sitio web Geek Solution',
   })
-  await act(async () => resolveRequest(new Response(null, { status: 200 })))
+  await act(async () => resolveRequest(Response.json({ success: true, message: 'Email sent successfully!' })))
   expect(screen.getByRole('status')).toHaveTextContent(/enviada correctamente/i)
   expect(screen.getByRole('button', { name: /enviar consulta/i })).toBeEnabled()
   for (const field of screen.getAllByRole('textbox')) expect(field).toHaveValue('')
@@ -113,7 +114,7 @@ it('reports honeypot success without an external request and keeps the trap outs
   const user = userEvent.setup()
   const fetchRequest = vi.fn()
   vi.stubGlobal('fetch', fetchRequest)
-  render(<ContactForm endpoint="https://example.test/contact" />)
+  render(<ContactForm accessKey="public-access-key" />)
   await fillValidForm(user)
   const honeypot = screen.getByLabelText('No completar este campo')
   expect(honeypot).toHaveAttribute('tabindex', '-1')
@@ -127,13 +128,15 @@ it('reports honeypot success without an external request and keeps the trap outs
   expect(screen.getByRole('textbox', { name: /^nombre/i })).toHaveValue('')
 })
 
-it.each(['http', 'network'])('keeps the inquiry available to retry after a %s failure', async (failure) => {
+it.each(['http', 'api', 'network'])('keeps the inquiry available to retry after a %s failure', async (failure) => {
   const user = userEvent.setup()
-  const fetchRequest = vi.fn(() => failure === 'http'
-    ? Promise.resolve(new Response(null, { status: 503 }))
-    : Promise.reject(new Error('Network unavailable')))
+  const fetchRequest = vi.fn(() => {
+    if (failure === 'http') return Promise.resolve(Response.json({ success: false, message: 'Unavailable' }, { status: 503 }))
+    if (failure === 'api') return Promise.resolve(Response.json({ success: false, message: 'Invalid access key' }))
+    return Promise.reject(new Error('Network unavailable'))
+  })
   vi.stubGlobal('fetch', fetchRequest)
-  render(<ContactForm endpoint="https://example.test/contact" />)
+  render(<ContactForm accessKey="public-access-key" />)
   await fillValidForm(user)
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(/no se pudo enviar/i))
@@ -141,7 +144,7 @@ it.each(['http', 'network'])('keeps the inquiry available to retry after a %s fa
   expect(screen.getByRole('button', { name: /enviar consulta/i })).toBeEnabled()
   expect(screen.getByRole('textbox', { name: /^nombre/i })).toHaveValue(' Ana Pérez ')
   expect(screen.getByRole('radio', { name: /hogar/i })).toBeChecked()
-  fetchRequest.mockResolvedValue(new Response(null, { status: 200 }))
+  fetchRequest.mockResolvedValue(Response.json({ success: true, message: 'Email sent successfully!' }))
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(/enviada correctamente/i))
 })

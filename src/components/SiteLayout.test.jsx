@@ -110,8 +110,8 @@ it('honors initial hash links and safely falls back for a missing destination', 
 
 it('recovers an inquiry across site navigation and clears the retained draft after success', async () => {
   const user = userEvent.setup()
-  vi.stubEnv('VITE_CONTACT_FORM_ENDPOINT', 'https://example.test/contact')
-  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 200 })))
+  vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', 'public-access-key')
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json({ success: true, message: 'Email sent successfully!' })))
   const localWrites = vi.spyOn(Storage.prototype, 'setItem')
   renderSite('/contacto')
   await user.type(screen.getByRole('textbox', { name: /^nombre/i }), 'Ana Pérez')

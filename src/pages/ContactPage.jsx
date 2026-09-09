@@ -25,7 +25,7 @@ function ContactPage() {
           </dl>
         </section>
         <div className="rounded-2xl border border-black/15 bg-white p-5 sm:p-8">
-          <ContactForm endpoint={import.meta.env.VITE_CONTACT_FORM_ENDPOINT} />
+          <ContactForm accessKey={import.meta.env.VITE_WEB3FORMS_ACCESS_KEY} />
         </div>
       </div>
     </main>

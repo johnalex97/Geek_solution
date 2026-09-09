@@ -11,8 +11,11 @@ export function validateContactForm(formData) {
   return errors
 }
 
-export function createContactPayload(formData) {
+export function createContactPayload(formData, accessKey) {
   return {
+    access_key: accessKey.trim(),
+    subject: 'Nueva consulta desde Geek Solution',
+    from_name: 'Geek Solution',
     name: formData.name.trim(),
     email: formData.email.trim(),
     phone: formData.phone.trim(),

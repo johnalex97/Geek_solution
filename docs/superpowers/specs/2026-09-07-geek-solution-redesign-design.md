@@ -66,7 +66,7 @@ El usuario elegirá primero “Empresa” u “Hogar”. La selección se enviar
 
 El formulario incluirá nombre, correo, teléfono opcional, tipo de cliente y mensaje. Tendrá validación accesible, foco en el primer error, estados anunciados mediante `aria-live` y mensajes con un siguiente paso claro. Durante el envío se bloquearán envíos duplicados.
 
-El endpoint `VITE_CONTACT_FORM_ENDPOINT` se inyectará durante la compilación de Docker mediante un argumento de construcción documentado y configurado en Compose/Easypanel.
+La clave pública `VITE_WEB3FORMS_ACCESS_KEY` se inyectará durante la compilación de Docker mediante un argumento de construcción documentado y configurado en Compose/Easypanel; el formulario enviará JSON al endpoint oficial de Web3Forms.
 
 ### Portal de soporte
 

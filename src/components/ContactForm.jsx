@@ -6,8 +6,9 @@ import AudienceSelector from './AudienceSelector.jsx'
 import { ContactDraftContext, initialContactForm } from './contactDraft.js'
 
 const inputClass = 'contact-input w-full rounded-xl border bg-white px-4 py-3 text-[var(--ink)] placeholder:text-[var(--technical-gray)]'
+const web3FormsEndpoint = 'https://api.web3forms.com/submit'
 
-export default function ContactForm({ endpoint }) {
+export default function ContactForm({ accessKey }) {
   const localDraft = useState(initialContactForm)
   const retainedDraft = useContext(ContactDraftContext)
   const [form, setForm] = retainedDraft ?? localDraft
@@ -54,18 +55,19 @@ export default function ContactForm({ endpoint }) {
       setForm(initialContactForm)
       return
     }
-    if (!endpoint) {
+    if (!accessKey?.trim()) {
       setStatus({ type: 'error', message: 'El formulario no está disponible en este momento. Escríbenos por WhatsApp o utiliza los canales de contacto.' })
       return
     }
     setStatus({ type: 'loading', message: 'Enviando…' })
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(web3FormsEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(createContactPayload(form)),
+        body: JSON.stringify(createContactPayload(form, accessKey)),
       })
-      if (!response.ok) throw new Error('request_failed')
+      const result = await response.json()
+      if (!response.ok || !result.success) throw new Error('request_failed')
       setStatus({ type: 'success', message: 'Consulta enviada correctamente. Pronto nos pondremos en contacto.' })
       setForm(initialContactForm)
       setErrors({})

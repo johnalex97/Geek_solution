@@ -22,7 +22,10 @@ describe('createContactPayload', () => {
   it('trims values and includes the audience', () => {
     expect(createContactPayload({
       name: ' Ana ', email: ' ana@example.com ', phone: ' 9999 ', audience: 'empresa', message: ' Redes ',
-    })).toEqual({
+    }, 'public-access-key')).toEqual({
+      access_key: 'public-access-key',
+      subject: 'Nueva consulta desde Geek Solution',
+      from_name: 'Geek Solution',
       name: 'Ana', email: 'ana@example.com', phone: '9999', audience: 'empresa', message: 'Redes',
       source: 'Sitio web Geek Solution',
     })
