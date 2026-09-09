@@ -2,6 +2,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import userEvent from '@testing-library/user-event'
 import { afterEach, expect, it, vi } from 'vitest'
 import ContactForm from './ContactForm.jsx'
+import { contactCards } from '../data/siteContent.js'
 
 afterEach(() => {
   cleanup()
@@ -46,6 +47,31 @@ it('associates inline errors and focuses the first invalid field in form order',
   expect(screen.getByRole('textbox', { name: /teléfono/i })).toHaveAttribute('autocomplete', 'tel')
 })
 
+it('commits error descriptions before focus and announces every invalid submission', async () => {
+  const user = userEvent.setup()
+  render(<ContactForm endpoint="" />)
+  const name = screen.getByRole('textbox', { name: /^nombre/i })
+  const focusSnapshots = []
+  name.addEventListener('focus', () => {
+    focusSnapshots.push({
+      invalid: name.getAttribute('aria-invalid'),
+      description: document.getElementById(name.getAttribute('aria-describedby'))?.textContent,
+    })
+  })
+  const submit = screen.getByRole('button', { name: /enviar consulta/i })
+  await user.click(submit)
+  const firstSummary = screen.getByRole('status').textContent
+  expect(firstSummary).toMatch(/revisa.*4.*campos/i)
+  await user.click(submit)
+  expect(screen.getByRole('status')).toHaveTextContent(/revisa.*4.*campos/i)
+  expect(screen.getByRole('status').textContent).not.toBe(firstSummary)
+  expect(focusSnapshots).toHaveLength(2)
+  for (const snapshot of focusSnapshots) {
+    expect(snapshot.invalid).toBe('true')
+    expect(snapshot.description).toBeTruthy()
+  }
+})
+
 it('offers an accessible next step when the endpoint is missing', async () => {
   const user = userEvent.setup()
   render(<ContactForm endpoint="" />)
@@ -53,7 +79,7 @@ it('offers an accessible next step when the endpoint is missing', async () => {
   await user.click(screen.getByRole('button', { name: /enviar consulta/i }))
   expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite')
   expect(screen.getByRole('status')).toHaveTextContent(/WhatsApp/i)
-  expect(screen.getByRole('link', { name: /WhatsApp/i })).toHaveAttribute('href', 'https://wa.me/50433837341')
+  expect(screen.getByRole('link', { name: /WhatsApp/i })).toHaveAttribute('href', contactCards.find((channel) => channel.label === 'WhatsApp').href)
   expect(screen.getByRole('button', { name: /enviar consulta/i })).toBeEnabled()
   expect(screen.getByRole('textbox', { name: /^nombre/i })).toHaveValue(' Ana Pérez ')
 })

@@ -1,17 +1,27 @@
-import { useId, useRef, useState } from 'react'
+import { useContext, useId, useLayoutEffect, useRef, useState } from 'react'
+import { contactCards } from '../data/siteContent.js'
 import { createContactPayload, validateContactForm } from '../utils/contactForm.js'
 import { ActionButton } from './ActionButton.jsx'
 import AudienceSelector from './AudienceSelector.jsx'
+import { ContactDraftContext, initialContactForm } from './contactDraft.js'
 
-const initialForm = { name: '', email: '', phone: '', audience: '', message: '', website: '' }
-const inputClass = 'w-full rounded-xl border border-black/20 bg-white px-4 py-3 text-[var(--ink)] placeholder:text-[var(--technical-gray)] aria-invalid:border-red-700'
+const inputClass = 'contact-input w-full rounded-xl border bg-white px-4 py-3 text-[var(--ink)] placeholder:text-[var(--technical-gray)]'
 
 export default function ContactForm({ endpoint }) {
-  const [form, setForm] = useState(initialForm)
+  const localDraft = useState(initialContactForm)
+  const retainedDraft = useContext(ContactDraftContext)
+  const [form, setForm] = retainedDraft ?? localDraft
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState({ type: 'idle', message: '' })
+  const [focusRequest, setFocusRequest] = useState(null)
+  const invalidAttempts = useRef(0)
   const fields = useRef({})
   const id = useId()
+  const whatsapp = contactCards.find((channel) => channel.label === 'WhatsApp')
+
+  useLayoutEffect(() => {
+    if (focusRequest) fields.current[focusRequest.name]?.focus()
+  }, [focusRequest])
 
   function updateField(name, value) {
     setForm((current) => ({ ...current, [name]: value }))
@@ -29,12 +39,19 @@ export default function ContactForm({ endpoint }) {
     setErrors(nextErrors)
     const firstError = ['name', 'email', 'audience', 'message'].find((name) => nextErrors[name])
     if (firstError) {
-      fields.current[firstError]?.focus()
+      invalidAttempts.current += 1
+      const count = Object.keys(nextErrors).length
+      setStatus({
+        type: 'validation',
+        message: `Intento ${invalidAttempts.current}: revisa ${count === 1 ? 'el campo indicado' : `los ${count} campos indicados`} antes de enviar.`,
+      })
+      // A fresh request also focuses repeated invalid submissions, after ARIA commits.
+      setFocusRequest({ name: firstError })
       return
     }
     if (form.website) {
       setStatus({ type: 'success', message: 'Consulta enviada correctamente.' })
-      setForm(initialForm)
+      setForm(initialContactForm)
       return
     }
     if (!endpoint) {
@@ -50,7 +67,7 @@ export default function ContactForm({ endpoint }) {
       })
       if (!response.ok) throw new Error('request_failed')
       setStatus({ type: 'success', message: 'Consulta enviada correctamente. Pronto nos pondremos en contacto.' })
-      setForm(initialForm)
+      setForm(initialContactForm)
       setErrors({})
     } catch {
       setStatus({ type: 'error', message: 'No se pudo enviar la consulta en este momento. Intenta de nuevo o escríbenos por WhatsApp.' })
@@ -85,10 +102,10 @@ export default function ContactForm({ endpoint }) {
         No completar este campo
         <input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={handleChange} />
       </label>
-      <div role="status" aria-live="polite" className={status.message ? 'rounded-xl border border-black/15 bg-[var(--paper)] p-4 text-sm leading-6' : undefined}>{status.message}</div>
+      <div role="status" aria-live="polite" aria-atomic="true" className={status.message ? 'rounded-xl border border-black/15 bg-[var(--paper)] p-4 text-sm leading-6' : undefined}>{status.message}</div>
       <div className="flex flex-col gap-3 sm:flex-row">
         <ActionButton type="submit" disabled={status.type === 'loading'} className="disabled:cursor-wait disabled:opacity-70">{status.type === 'loading' ? 'Enviando…' : 'Enviar consulta'}</ActionButton>
-        <ActionButton href="https://wa.me/50433837341" variant="secondary" target="_blank" rel="noreferrer">Abrir WhatsApp</ActionButton>
+        <ActionButton href={whatsapp.href} variant="secondary" target="_blank" rel="noreferrer">Abrir WhatsApp</ActionButton>
       </div>
     </form>
   )

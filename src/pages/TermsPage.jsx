@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import PageMeta from '../components/PageMeta.jsx'
 import { pageMeta, termsBlocks } from '../data/siteContent.js'
 
@@ -24,7 +25,7 @@ function TermsPage() {
           <ul className="divide-y divide-black/15">
             {termsBlocks.map((block) => (
               <li key={block.title}>
-                <a href={`#${sectionIds[block.title]}`} className="flex min-h-12 items-center py-3 text-sm font-semibold underline decoration-black/25 underline-offset-4 hover:text-[#007a3f]">{block.title}</a>
+                <Link to={`#${sectionIds[block.title]}`} className="flex min-h-12 items-center py-3 text-sm font-semibold underline decoration-black/25 underline-offset-4 hover:text-[#007a3f]">{block.title}</Link>
               </li>
             ))}
           </ul>

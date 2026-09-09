@@ -61,7 +61,7 @@ export default function SiteHeader() {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
-          className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl border border-black/15 bg-white lg:hidden"
+          className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl border border-black/15 bg-white transition-colors hover:border-[#007a3f] hover:bg-[#e4f4ea] hover:text-[#007a3f] lg:hidden"
         >
           {menuOpen ? <IconClose aria-hidden="true" /> : <IconMenu aria-hidden="true" />}
         </button>
@@ -71,7 +71,7 @@ export default function SiteHeader() {
         id="mobile-navigation"
         aria-label="Navegación móvil"
         hidden={!menuOpen}
-        className="max-h-[calc(100dvh-10rem-env(safe-area-inset-bottom))] overflow-y-auto border-t border-black/10 bg-[var(--paper)] px-5 py-5 lg:hidden"
+        className="max-h-[calc(100dvh-10rem-env(safe-area-inset-bottom))] overflow-y-auto overscroll-contain border-t border-black/10 bg-[var(--paper)] px-5 py-5 lg:hidden"
       >
         <div className="mx-auto grid max-w-7xl gap-2">
           <NavigationLinks onNavigate={closeMenu} />

@@ -15,10 +15,33 @@
   --graphite: #18201c;
   --paper: #f5f8f6;
   --technical-gray: #66736c;
+  --control-border: #66736c;
+  --control-error-border: #b91c1c;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 64rem) {
+  html { scroll-padding-bottom: 1rem; }
+}
+
+a, button, input, textarea {
+  -webkit-tap-highlight-color: rgb(0 122 63 / 20%);
+}
+
+a, button {
+  touch-action: manipulation;
+}
+
+.contact-input {
+  border-color: var(--control-border);
+}
+
+.contact-input[aria-invalid="true"] {
+  border-color: var(--control-error-border);
 }
 
 body {

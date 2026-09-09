@@ -25,7 +25,7 @@ describe('informational pages', () => {
   })
 
   it('links the terms index to all four titled sections with semantic condition lists', () => {
-    render(<MemoryRouter><TermsPage /></MemoryRouter>)
+    render(<MemoryRouter initialEntries={['/terminos']}><TermsPage /></MemoryRouter>)
 
     const navigation = screen.getByRole('navigation', { name: 'Secciones de los términos' })
     const index = within(navigation).getByRole('list')
@@ -39,7 +39,7 @@ describe('informational pages', () => {
       ['Pagos', 'pagos', 3],
     ]) {
       const link = within(index).getByRole('link', { name: title })
-      expect(link).toHaveAttribute('href', `#${id}`)
+      expect(link).toHaveAttribute('href', `/terminos#${id}`)
       const section = document.getElementById(id)
       expect(section?.tagName).toBe('SECTION')
       expect(within(section).getByRole('heading', { name: title, level: 2 })).toBeInTheDocument()
