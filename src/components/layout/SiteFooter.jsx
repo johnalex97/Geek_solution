@@ -46,7 +46,7 @@ export default function SiteFooter() {
           <p>{companyProfile.supportSummary}</p>
           <div className="mt-5 flex flex-col items-center gap-2 border-t border-white/10 pt-5 text-center sm:flex-row sm:justify-between sm:text-left">
             <p>Geek Solution © 2026 | TODOS LOS DERECHOS RESERVADOS.</p>
-            <p>Made by Jonatan Maradiaga</p>
+            <p> by Jonatan Maradiaga</p>
           </div>
         </div>
       </div>
