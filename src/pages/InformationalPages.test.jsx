@@ -49,11 +49,11 @@ describe('informational pages', () => {
     }
   })
 
-  it('offers one external Freshdesk action and secondary Services and Contact routes', () => {
+  it('offers one external GLPI help desk action and secondary Services and Contact routes', () => {
     render(<MemoryRouter><PortalPage /></MemoryRouter>)
 
     const portal = screen.getByRole('link', { name: /abrir portal de soporte/i })
-    expect(portal).toHaveAttribute('href', 'https://portaldeayudatecnicageeksolution.freshdesk.com/')
+    expect(portal).toHaveAttribute('href', 'https://mesadeayuda.geeksolutionhn.com/')
     expect(portal).toHaveAttribute('target', '_blank')
     expect(portal.getAttribute('rel')).toContain('noreferrer')
     expect(screen.getAllByRole('link').filter((link) => link.getAttribute('href').startsWith('https://'))).toEqual([portal])
