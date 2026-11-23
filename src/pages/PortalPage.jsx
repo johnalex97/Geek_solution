@@ -11,20 +11,20 @@ function PortalPage() {
       <section className="overflow-hidden rounded-3xl bg-[var(--ink)] text-white">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/15 px-6 py-5 sm:px-10 lg:px-14">
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--signal-green)]">Portal de soporte</p>
-          <p className="font-mono text-xs text-white/65">Geek Solution / Freshdesk</p>
+          <p className="font-mono text-xs text-white/65">Geek Solution / Mesa de ayuda</p>
         </div>
         <div className="px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
           <h1 className="max-w-3xl text-balance font-display text-[2.6rem] font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl">
             Tu punto de contacto con soporte técnico.
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
-            Soporte orientado a continuidad, disponibilidad y calidad del servicio. En Freshdesk puedes crear solicitudes, seguir incidencias y comunicarte con nuestro equipo de soporte.
+            Soporte orientado a continuidad, disponibilidad y calidad del servicio. En nuestra mesa de ayuda puedes crear tickets, consultar su estado y comunicarte con nuestro equipo de soporte.
           </p>
           <div className="mt-10">
-            <ActionButton href="https://portaldeayudatecnicageeksolution.freshdesk.com/" target="_blank" rel="noopener noreferrer" className="w-full focus-visible:outline-[var(--signal-green)] sm:w-auto" aria-describedby="portal-window-note">
+            <ActionButton href="https://mesadeayuda.geeksolutionhn.com/" target="_blank" rel="noopener noreferrer" className="w-full focus-visible:outline-[var(--signal-green)] sm:w-auto" aria-describedby="portal-window-note">
               Abrir portal de soporte <IconArrow />
             </ActionButton>
-            <p id="portal-window-note" className="mt-3 text-xs leading-6 text-white/65">Se abre en una nueva pestaña en Freshdesk.</p>
+            <p id="portal-window-note" className="mt-3 text-xs leading-6 text-white/65">Se abre en una nueva pestaña en la mesa de ayuda de Geek Solution.</p>
           </div>
         </div>
       </section>
